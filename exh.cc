@@ -13,18 +13,18 @@ struct Player {
   int points;
 };
 
-int main(int argc, char **argv) {
-  ifstream in(argv[1]); // Reading database
+vector<Player> players;
+uint goal = 1;
+uint def, mid, str, total_limit, player_limit;
 
-  vector<Player> players;
+void read_input(const string &database, const string &input_file) {
+  ifstream in(database); // Reading database
 
   while (not in.eof()) {
     Player player;
     getline(in, player.name, ';');
     if (player.name == "")
       break;
-    cout << "Name: " << player.name << endl;
-
     getline(in, player.position, ';');
     in >> player.price;
     char aux;
@@ -37,21 +37,27 @@ int main(int argc, char **argv) {
     players.push_back(player);
   }
 
-  for (const auto &player : players) {
+  /*for (const auto &player : players) {
     cout << "Nom: " << player.name << endl;
     cout << "Posició: " << player.position << endl;
     cout << "Preu: " << player.price << endl;
     cout << "Club: " << player.team << endl;
     cout << "Punts: " << player.points << endl;
     cout << endl;
-  }
+  }*/
 
-  cout << players.size() << endl;
+  cout << players.size() << " players" << endl;
   in.close();
 
-  in.open(argv[2]); // Reading input
-  uint goal = 1;
-  uint def, mid, str, t, j;
-  in >> def >> mid >> str >> t >> j;
+  in.open(input_file); // Reading input
+  in >> def >> mid >> str >> total_limit >> player_limit;
   in.close();
+}
+
+int main(int argc, char **argv) {
+  string database = argv[1];
+  string input_file = argv[2];
+  string output_file = argv[3];
+
+  read_input(database, input_file);
 }
