@@ -13,22 +13,19 @@ struct Player {
   int points;
 };
 
-struct Team {
-  int points = 0;
-  int price = 0;
-  // int/string/vector<int> tactic;
-};
-
 string database;
 string input_file;
 string output_file;
 vector<Player> players;
-uint goal = 1;
-uint def, mid, str, total_limit, player_limit;
+vector<bool> used;
+vector<Player> solution;
+int current_points, current_price, best_points = 0;
+int goal = 1;
+int def, mid, str, total_limit, player_limit;
 double start_time, end_time;
 double now() { return clock() / double(CLOCKS_PER_SEC); }
 
-void read_input(const string &database, const string &input_file) {
+void read_input() {
   ifstream in(database); // Reading database
 
   while (not in.eof()) {
@@ -48,16 +45,8 @@ void read_input(const string &database, const string &input_file) {
     players.push_back(player);
   }
 
-  /*for (const auto &player : players) {
-    cout << "Nom: " << player.name << endl;
-    cout << "Posició: " << player.position << endl;
-    cout << "Preu: " << player.price << endl;
-    cout << "Club: " << player.team << endl;
-    cout << "Punts: " << player.points << endl;
-    cout << endl;
-  }*/
-
-  cout << players.size() << " players" << endl;
+  used = vector<bool>(players.size());
+  cout << players.size() << " players loaded" << endl;
   in.close();
 
   in.open(input_file); // Reading input
@@ -65,7 +54,7 @@ void read_input(const string &database, const string &input_file) {
   in.close();
 }
 
-void print_output(string &output_file) {
+void print_output() {
   ofstream out(output_file);
   out.setf(ios::fixed);
   out.precision(3);
@@ -73,22 +62,75 @@ void print_output(string &output_file) {
   end_time = now();
   double time = end_time - start_time;
 
-  // Escriu solució
+  // Quedaria esbrinar quina posició te cada jugador per a printar per posicions
+  cout << "Found a solution in " << time << " seconds!" << endl;
   out << time << endl;
-  cout << time << endl;
-
+  out << "Team:" << endl;
+  for (const Player &player : solution) {
+    out << "Name: " << player.name << ", Position: " << player.position
+        << ", Price: " << player.price << ", Team: " << player.team
+        << ", Points: " << player.points << endl;
+  }
+  out << "Total Points: " << best_points << ", Total Price: " << current_price
+      << endl;
   out.close();
 }
 
-void exhaustive_search() { print_output(output_file); }
+void exhaustive_search(int k) {
+  // Equip complet, comprova si la solució és millor i escriu
+  if (k == 11) {
+    if (goal == 0 and def == 0 and mid == 0 and str == 0 and
+        current_price <= total_limit) {
+      if (current_points > best_points) {
+        best_points = current_points;
+        print_output();
+      }
+      return;
+    }
+  }
+
+  else if (goal >= 0 and def >= 0 and mid >= 0 and str >= 0) {
+    for (int i = 0; i < int(players.size()); i += 20) {
+      if (not used[i]) {
+        used[i] = true;
+        solution.push_back(players[i]);
+        current_points += players[i].points;
+        current_price += players[i].price;
+        if (players[i].position == "def") {
+          --def;
+        } else if (players[i].position == "mig") {
+          --mid;
+        } else if (players[i].position == "dav") {
+          --str;
+        } else
+          --goal;
+        exhaustive_search(k + 1);
+        solution.pop_back();
+        current_points -= players[i].points;
+        current_price -= players[i].price;
+        used[i] = false;
+        if (players[i].position == "def") {
+          ++def;
+        } else if (players[i].position == "mig") {
+          ++mid;
+        } else if (players[i].position == "dav") {
+          ++str;
+        } else
+          ++goal;
+      }
+    }
+  }
+}
 
 int main(int argc, char **argv) {
   database = argv[1];
   input_file = argv[2];
   output_file = argv[3];
 
-  read_input(database, input_file);
+  read_input();
 
   start_time = now();
-  exhaustive_search();
+  exhaustive_search(0);
+
+  return 0;
 }
