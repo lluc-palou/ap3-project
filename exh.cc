@@ -1,3 +1,11 @@
+/*
+Max points found for example input:
+ - Not sorting database: 1323pts in 72s
+ - Sorting database: 1350pts in 0.001s (greedy approach works better!?)
+                     1448pts in 188s
+*/
+
+#include <algorithm>
 #include <cassert>
 #include <ctime>
 #include <fstream>
@@ -25,9 +33,18 @@ int def, mid, str, total_limit, player_limit;
 double start_time, end_time;
 double now() { return clock() / double(CLOCKS_PER_SEC); }
 
-void read_input() {
-  ifstream in(database); // Reading database
+// Returns player with most points, used to sort database
+bool compare_players_price(const Player &a, const Player &b) {
+  if (a.points != b.points) {
+    return a.points > b.points;
+  } else {
+    // If same amount of points, sort by price in ascending order
+    return a.price < b.price;
+  }
+}
 
+void read_input() {
+  ifstream in(database); // Read database
   while (not in.eof()) {
     Player player;
     getline(in, player.name, ';');
@@ -44,18 +61,21 @@ void read_input() {
 
     players.push_back(player);
   }
-
-  used = vector<bool>(players.size());
-  cout << players.size() << " players loaded" << endl;
   in.close();
 
-  in.open(input_file); // Reading input
+  used = vector<bool>(players.size());
+
+  // Sort database from most points scored to least
+  // (greedy approach, can it be used in exh?)
+  // sort(players.begin(), players.end(), compare_players_price);
+
+  in.open(input_file); // Read input
   in >> def >> mid >> str >> total_limit >> player_limit;
   in.close();
 }
 
 void print_output() {
-  ofstream out(output_file);
+  ofstream out(output_file); // Write output
   out.setf(ios::fixed);
   out.precision(3);
 
@@ -77,21 +97,20 @@ void print_output() {
 }
 
 void exhaustive_search(int k) {
-  // Equip complet, comprova si la solució és millor i escriu
-  if (k == 11) {
-    if (goal == 0 and def == 0 and mid == 0 and str == 0 and
-        current_price <= total_limit) {
-      if (current_points > best_points) {
-        best_points = current_points;
-        print_output();
-      }
-      return;
-    }
+  // Complete team, check if solution is valid, check if it's better than the
+  // best found yet and if so print it
+  if (k == 11 and goal == 0 and def == 0 and mid == 0 and str == 0 and
+      current_price <= total_limit and current_points > best_points) {
+    best_points = current_points;
+    print_output();
+    return;
   }
 
   else if (goal >= 0 and def >= 0 and mid >= 0 and str >= 0) {
-    for (int i = 0; i < int(players.size()); i += 20) {
-      if (not used[i]) {
+    for (int i = 0; i < int(players.size()); ++i) {
+      // millor manera d'escollir jugadors?
+      if (not used[i] and players[i].price <= player_limit and
+          current_price + players[i].price < total_limit) {
         used[i] = true;
         solution.push_back(players[i]);
         current_points += players[i].points;
@@ -105,10 +124,10 @@ void exhaustive_search(int k) {
         } else
           --goal;
         exhaustive_search(k + 1);
+        used[i] = false;
         solution.pop_back();
         current_points -= players[i].points;
         current_price -= players[i].price;
-        used[i] = false;
         if (players[i].position == "def") {
           ++def;
         } else if (players[i].position == "mig") {
