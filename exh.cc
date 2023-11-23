@@ -154,6 +154,4 @@ int main(int argc, char **argv) {
 
   start_time = now();
   exhaustive_search(0);
-
-  return 0;
 }
