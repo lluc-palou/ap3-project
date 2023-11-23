@@ -82,7 +82,8 @@ void print_output() {
   end_time = now();
   double time = end_time - start_time;
 
-  // Quedaria esbrinar quina posició te cada jugador per a printar per posicions
+  // Quedaria esbrinar quina posició te cada jugador per a printar amb el format
+  // demanat (per posicions). No es pot assumir que la solució estigui ordenada.
   cout << "Found a solution in " << time << " seconds!" << endl;
   out << time << endl;
   out << "Team:" << endl;
@@ -97,8 +98,8 @@ void print_output() {
 }
 
 void exhaustive_search(int k) {
-  // Complete team, check if solution is valid, check if it's better than the
-  // best found yet and if so print it
+  // Complete team, check if solution is valid and if it's better than the
+  // best found yet. If so, print it.
   if (k == 11 and goal == 0 and def == 0 and mid == 0 and str == 0 and
       current_price <= total_limit and current_points > best_points) {
     best_points = current_points;
@@ -108,7 +109,10 @@ void exhaustive_search(int k) {
 
   else if (goal >= 0 and def >= 0 and mid >= 0 and str >= 0) {
     for (int i = 0; i < int(players.size()); ++i) {
-      // millor manera d'escollir jugadors?
+      /* If team uncomplete, check if chosen player has already been used, check
+      if its price is below the player's price limit (J) and check if the
+      current price of the team plus the player's price is below the total
+      limit (T). */
       if (not used[i] and players[i].price <= player_limit and
           current_price + players[i].price < total_limit) {
         used[i] = true;
