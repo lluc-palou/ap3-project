@@ -1,6 +1,6 @@
 /*
 Max points found for example input:
- - Not sorting database: 1323pts in 72s
+ - Not sorting database: 1309pts in 568s
  - Sorting database: 1350pts in 0.001s (greedy approach works better!?)
                      1448pts in 188s
 */
