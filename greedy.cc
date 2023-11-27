@@ -81,8 +81,6 @@ void read_query() {
 // Writes the best solution found by the algorithm till now in the output file.
 void write_solution(const int &current_price,
                     const vector<Player> &partial_solution) {
-  // S'ha de resoldre aquesta part per imprimir en ordre els jugadors per
-  // posició.
   /*
   // Sorts the solution based on soccer player positions for better formatting.
   sort(partial_solution.begin(), partial_solution.end(),
