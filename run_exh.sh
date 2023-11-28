@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# Compiles the main program.
+g++ -Wall -O3 -std=c++17 exh3.cc -o exh3
+
+# Checks whether compilation was successful.
+if [ $? -ne 0 ]; then
+    echo "Compilation failed. Exiting."
+    exit 1
+fi
+
 # Path to the folder containing the query files.
 query_folder="./public_benchs"
 
