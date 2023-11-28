@@ -37,6 +37,7 @@ Algorithms:
 #include <iostream>
 #include <fstream>
 #include <algorithm>
+#include <string>
 #include <cassert>
 #include <ctime>
 #include <vector>
@@ -59,25 +60,15 @@ string query;
 string output_file;
 
 // General data data structures, global variables and timing.
-vector<Player> players;
-vector<bool> used;
 int best_points = 0;
-int def, mig, dav, por, total_limit, player_limit;
+int def, mig, dav, total_limit, player_limit;
+int por = 1;
 double start_time, end_time;
 double now() { return clock() / double(CLOCKS_PER_SEC); }
 
-// Returns the player with most points, used to sort the player database.
-bool compare_players_price(const Player &a, const Player &b) {
-  if (a.points != b.points) {
-    return a.points > b.points;
-  } else {
-    // In case of same amount of points, sorting by price in ascending order.
-    return a.price < b.price;
-  }
-}
-
 // Reads the soccer player database.
-void read_data_base() {
+vector<Player> read_data_base() {
+  vector<Player> players;
   ifstream in(data_base);
   while (not in.eof()) {
     Player player;
@@ -97,11 +88,7 @@ void read_data_base() {
   }
   in.close();
 
-  // Vector to mark used soccer players in the exhaustive search.
-  used = vector<bool>(players.size(), false);
-  // Sort database from most points scored to least
-  // (greedy approach, can it be used in exh?)
-  // sort(players.begin(), players.end(), compare_players_price);
+  return players;
 }
 
 // Reads the given query, aka player configuration and price condavaints.
@@ -112,67 +99,74 @@ void read_query() {
   in.close();
 }
 
-// Writes the best solution found by the algorithm till now in the output file.
-void write_solution(int& current_price, int& current_points, 
-                    const vector<Player>& partial_solution) {
-    // S'ha de resoldre aquesta part per imprimir en ordre els jugadors per posició.
-    /*
-    // Sorts the solution based on soccer player positions for better formatting.
-    sort(partial_solution.begin(), partial_solution.end(), compare_players_position);
-
-    // Returns the player by lexicographical order.
-    bool compare_players_position(const Player &a, const Player &b) {
+// Compares two soccer players based on their positions for lexicographical order.
+bool compare_players_position(const Player &a, const Player &b) {
         return a.position < b.position;
-    }
-    */
+}
 
-    ofstream out(output_file, ios::app);
-    out.setf(ios::fixed);
-    out.precision(1);
+// Writes the best solution found by the algorithm till now in the output file.
+void write_solution(int current_price, int current_points, 
+                    vector<Player> partial_solution) {
 
-    // Solution timing.
-    end_time = now();
-    double time = end_time - start_time;
+  // Sorts the solution based on soccer player positions for better formatting.
+  sort(partial_solution.begin(), partial_solution.end(), compare_players_position);
 
-    // Outputs the time for this solution.
-    out << time << endl;
+  ofstream out(output_file, ios::app);
+  out.setf(ios::fixed);
+  out.precision(1);
 
-    // Creates a map to group soccer players by position.
-    unordered_map<string, vector<string>> players_position;
+  // Solution timing.
+  end_time = now();
+  double time = end_time - start_time;
 
-    // Fills the map.
-    for (const Player &player : partial_solution) {
-        players_position[player.position].push_back(player.name);
-    }
+  // Outputs the time for this solution.
+  out << time << endl;
 
-    // Writes the tactic soccer players by positions.
-    out << "POR: " << players_position["por"][0] << endl;
+  // Creates a map to group soccer players by position.
+  unordered_map<string, vector<string>> players_position;
 
-    out << "DEF: ";
-    for (const string &name : players_position["def"]) {
-        out << name << ";";
-    }
-    out << endl;
+  // Fills the map.
+  for (const Player &player : partial_solution) {
+    players_position[player.position].push_back(player.name);
+  }
 
-    out << "MIG: ";
-    for (const string &name : players_position["mig"]) {
-        out << name << ";";
-    }
-    out << endl;
+  // Writes the tactic soccer players by positions.
+  out << "POR: " << players_position["por"][0] << endl;
 
-    out << "DAV: ";
-    for (const string &name : players_position["dav"]) {
-        out << name << ";";
-    }
-    out << endl;
+  out << "DEF: ";
+  for (auto it = players_position["def"].begin(); it != players_position["def"].end(); ++it) {
+    out << *it;
+      if (next(it) != players_position["def"].end()) {
+        out << ";";
+      }
+  }
+  out << endl;
 
-    // Writes best solution achieved points and price.
-    out << "Punts: " << best_points << endl;
-    out << "Preu: " << current_price << endl;
+  out << "MIG: ";
+  for (auto it = players_position["mig"].begin(); it != players_position["mig"].end(); ++it) {
+    out << *it;
+      if (next(it) != players_position["mig"].end()) {
+        out << ";";
+      }
+  }
+  out << endl;
 
-    // Adds a separator between solutions.
-    out << "------------------------------------" << endl;
-    out.close();
+  out << "DAV: ";
+  for (auto it = players_position["dav"].begin(); it != players_position["dav"].end(); ++it) {
+    out << *it;
+      if (next(it) != players_position["dav"].end()) {
+        out << ";";
+      }
+  }
+  out << endl;
+
+  // Writes best solution achieved points and price.
+  out << "Punts: " << best_points << endl;
+  out << "Preu: " << current_price << endl;
+
+  // Adds a separator between solutions.
+  out << endl;
+  out.close();
 }
 
 // Checks whether the query constraints are satisfied.
@@ -183,65 +177,74 @@ bool satisfies_query_constraints(int& def_count, int& mig_count, int& dav_count,
 }
 
 // Main algorithm concerning exhaustive search and backtracking.
-void exhaustive_search(int idx, int def_count, int mig_count, int dav_count, 
+void exhaustive_search(int def_count, int mig_count, int dav_count, 
                        int por_count, int current_price, int current_points,
-                       vector<bool>& used, vector<Player>& partial_solution) {
+                       const vector<Player>& players, vector<bool>& used, 
+                       vector<Player>& partial_solution) {
   // Base case: a partial solution has been extended and can be considered as 
-  // a final problem solution.
-  if (idx == int(partial_solution.size())) {
-    // Checks whether current solution satisfies the query constraints,
-    // and updates the best solution found till now.
-    if(satisfies_query_constraints(def_count, mig_count, dav_count, por_count, 
-    current_price, current_points)) {
-      best_points = current_points;
-      write_solution(current_price, current_points, partial_solution);
-      return;
-    }
+  // a final problem solution. Checks whether current solution satisfies the query 
+  // constraints, and updates the best solution found till now.
+  if(satisfies_query_constraints(def_count, mig_count, dav_count, por_count, current_price, 
+  current_points)) {
+    best_points = current_points;
+    cout << "Solution found with score: " << best_points << endl;
+    cout << def_count << " " << mig_count << " " << dav_count << " " << por_count << " " << current_price << " " << current_points << endl;
+    write_solution(current_price, current_points, partial_solution);
+    return;
   }
 
+  if (current_price > total_limit) return;
+
   // Recursive case:
-  // Extends the partial solution excluding the same soccer player.
-  exhaustive_search(idx+1, def_count, mig_count, dav_count, por_count, current_price, 
-  current_points, used, partial_solution);
+  for (int i = 0; i < int(players.size()); ++i) {
+    // Extends the partial solution including a soccer player whether 
+    // satisfies the query constraints.
+    if (not used[i] and ((players[i].position == "def" and def_count < def) or
+                           (players[i].position == "mig" and mig_count < mig) or
+                           (players[i].position == "dav" and dav_count < dav) or
+                           (players[i].position == "por" and por_count == 0)) and 
+                            players[i].price < player_limit) {
+      // Soccer player is set to used.
+      partial_solution.push_back(players[i]);
+      used[i] = true;
 
-  // Extends the partial solution including the next soccer player whether 
-  // satisfies the query constraints.
-  if (not used[idx] and ((players[idx].position == "def" and def_count < def) or
-                      (players[idx].position == "mig" && mig_count < mig) or
-                      (players[idx].position == "dav" && dav_count < dav) or
-                      (players[idx].position == "por" && por_count == 0))) {
+      // Updates soccer player position counters, prices, and points.       
+      def_count += (players[i].position == "def");
+      mig_count += (players[i].position == "mig");
+      dav_count += (players[i].position == "dav");
+      por_count += (players[i].position == "por");
+      current_price += players[i].price;
+      current_points += players[i].points;
+        
+      exhaustive_search(def_count, mig_count, dav_count, por_count, current_price,
+      current_points, players, used, partial_solution);
     
-    // Soccer player is set to used.
-    used[idx] = true;
-
-        // Updates soccer player position counters, prices, and points.        
-        def_count += (players[idx].position == "def");
-        mig_count += (players[idx].position == "mig");
-        dav_count += (players[idx].position == "dav");
-        por_count += (players[idx].position == "por");
-        current_price += players[idx].price;
-        current_points += players[idx].points;
-    
-    exhaustive_search(idx+1, def_count, mig_count, dav_count, por_count, current_price,
-    current_points, used, partial_solution);
-
-    // Soccer player is set to unused.
-    used[idx] = false;
+      // Undo changes made during the recursive call.
+      def_count -= (players[i].position == "def");
+      mig_count -= (players[i].position == "mig");
+      dav_count -= (players[i].position == "dav");
+      por_count -= (players[i].position == "por");
+      current_price -= players[i].price;
+      current_points -= players[i].points;
+      used[i] = false;
+      partial_solution.pop_back();
+    }
   }
 }
 
 int main(int argc, char **argv) {
-  // Arguments passed in code execution.
+  // Files read in code execution.
   data_base = argv[1];
   query = argv[2];
   output_file = argv[3];
 
   // Reads the input files.
-  read_data_base();
+  vector<Player> players = read_data_base();
+  vector<bool> used(players.size(), false);
   read_query();
 
   // Algorithm execution, solution writting, and timing.
   start_time = now();
   vector<Player> partial_solution;
-  exhaustive_search(0, 0, 0, 0, 0, 0, 0, used, partial_solution);
+  exhaustive_search(0, 0, 0, 0, 0, 0, players, used, partial_solution);
 }
