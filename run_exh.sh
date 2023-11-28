@@ -4,7 +4,7 @@
 query_folder="./public_benchs"
 
 # List of queries.
-queries=("$query_folder/easy-2.txt" "$query_folder/easy-4.txt" "$query_folder/easy-6.txt" "$query_folder/hard-1.txt" "$query_folder/hard-3.txt" "$query_folder/hard-5.txt" "$query_folder/hard-7.txt" "$query_folder/med-2.txt" "$query_folder/med-4.txt" "$query_folder/med-6.txt"
+queries=("$query_folder/easy-1.txt" "$query_folder/easy-2.txt" "$query_folder/easy-4.txt" "$query_folder/easy-6.txt" "$query_folder/hard-1.txt" "$query_folder/hard-3.txt" "$query_folder/hard-5.txt" "$query_folder/hard-7.txt" "$query_folder/med-2.txt" "$query_folder/med-4.txt" "$query_folder/med-6.txt"
          "$query_folder/easy-3.txt" "$query_folder/easy-5.txt" "$query_folder/easy-7.txt" "$query_folder/hard-2.txt" "$query_folder/hard-4.txt" "$query_folder/hard-6.txt" "$query_folder/med-1.txt" "$query_folder/med-3.txt" "$query_folder/med-5.txt" "$query_folder/med-7.txt")
 
 # Path to program.
