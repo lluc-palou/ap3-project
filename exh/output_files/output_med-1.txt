@@ -1,0 +1,88 @@
+0.0
+POR: Iván Villar
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Dani García
+DAV: Villalibre;Joao Félix;Fake_dav1
+Punts: 1023
+Preu: 75000000
+
+0.0
+POR: Iván Villar
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Dani García
+DAV: Joao Félix;Negredo;Fake_dav1
+Punts: 1071
+Preu: 74300000
+
+0.0
+POR: Iván Villar
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Muniain
+DAV: Joao Félix;Negredo;Fake_dav1
+Punts: 1114
+Preu: 74300000
+
+0.1
+POR: Iván Villar
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Raúl García
+DAV: Aspas;Fake_dav1;Fake_dav2
+Punts: 1141
+Preu: 75000000
+
+0.3
+POR: Iván Villar
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Brasanac
+DAV: Aspas;Joao Félix;Herrera
+Punts: 1175
+Preu: 75000000
+
+0.3
+POR: Iván Villar
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Brasanac
+DAV: Borja Iglesias;Joao Félix;Fake_dav1
+Punts: 1182
+Preu: 75000000
+
+2.5
+POR: Iván Villar
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Guillamón
+DAV: Aspas;Joao Félix;Fake_dav1
+Punts: 1208
+Preu: 75000000
+
+6.4
+POR: Iván Villar
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Brian Ocampo
+DAV: Aspas;Joao Félix;Miguel Rodríguez
+Punts: 1217
+Preu: 74092000
+
+146.1
+POR: Iván Villar
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Muniain;Brasanac
+DAV: Borja Iglesias;Joao Félix;Fake_dav1
+Punts: 1223
+Preu: 75000000
+
+148.4
+POR: Iván Villar
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Muniain;Guillamón
+DAV: Aspas;Joao Félix;Fake_dav1
+Punts: 1249
+Preu: 75000000
+
+152.3
+POR: Iván Villar
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Muniain;Brian Ocampo
+DAV: Aspas;Joao Félix;Miguel Rodríguez
+Punts: 1258
+Preu: 74092000
+

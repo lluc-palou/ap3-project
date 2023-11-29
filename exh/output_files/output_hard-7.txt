@@ -1,0 +1,160 @@
+0.0
+POR: Oblak
+DEF: Giménez;Savic;De Marcos;Lekue;Yuri
+MIG: Koke;Lemar;Saúl
+DAV: Correa;Villalibre
+Punts: 1251
+Preu: 96000000
+
+0.0
+POR: Oblak
+DEF: Giménez;Savic;De Marcos;Lekue;Yuri
+MIG: Koke;Lemar;Saúl
+DAV: Correa;Iñaki Williams
+Punts: 1423
+Preu: 106000000
+
+0.0
+POR: Oblak
+DEF: Giménez;Savic;De Marcos;Lekue;Yuri
+MIG: Koke;Lemar;Saúl
+DAV: Correa;Aspas
+Punts: 1424
+Preu: 98000000
+
+0.0
+POR: Oblak
+DEF: Giménez;Savic;De Marcos;Lekue;Yuri
+MIG: Koke;Lemar;Saúl
+DAV: Correa;Borja Iglesias
+Punts: 1431
+Preu: 99000000
+
+0.0
+POR: Oblak
+DEF: Giménez;Savic;De Marcos;Lekue;Yuri
+MIG: Koke;Lemar;Saúl
+DAV: Correa;Vinícius Jr
+Punts: 1469
+Preu: 109000000
+
+0.0
+POR: Oblak
+DEF: Giménez;Savic;De Marcos;Lekue;Yuri
+MIG: Koke;Lemar;Saúl
+DAV: Correa;Griezmann
+Punts: 1553
+Preu: 117000000
+
+0.0
+POR: Oblak
+DEF: Giménez;Savic;De Marcos;Lekue;Yuri
+MIG: Koke;Lemar;Saúl
+DAV: Iñaki Williams;Griezmann
+Punts: 1599
+Preu: 124000000
+
+0.0
+POR: Oblak
+DEF: Giménez;Savic;De Marcos;Lekue;Yuri
+MIG: Koke;Lemar;Saúl
+DAV: Aspas;Griezmann
+Punts: 1600
+Preu: 116000000
+
+0.0
+POR: Oblak
+DEF: Giménez;Savic;De Marcos;Lekue;Yuri
+MIG: Koke;Lemar;Saúl
+DAV: Borja Iglesias;Griezmann
+Punts: 1607
+Preu: 117000000
+
+0.0
+POR: Oblak
+DEF: Giménez;Savic;De Marcos;Lekue;Yuri
+MIG: Koke;Lemar;Saúl
+DAV: Vinícius Jr;Griezmann
+Punts: 1645
+Preu: 127000000
+
+0.0
+POR: Oblak
+DEF: Giménez;Savic;De Marcos;Lekue;Yuri
+MIG: Koke;Lemar;Saúl
+DAV: Griezmann;Lewandowski
+Punts: 1687
+Preu: 128000000
+
+0.1
+POR: Oblak
+DEF: Giménez;Savic;De Marcos;Lekue;Yuri
+MIG: Koke;Lemar;Marcos Llorente
+DAV: Griezmann;Lewandowski
+Punts: 1705
+Preu: 137000000
+
+0.4
+POR: Oblak
+DEF: Giménez;Savic;De Marcos;Lekue;Yuri
+MIG: Koke;Lemar;Muniain
+DAV: Griezmann;Lewandowski
+Punts: 1728
+Preu: 128000000
+
+0.7
+POR: Oblak
+DEF: Giménez;Savic;De Marcos;Lekue;Yuri
+MIG: Koke;Lemar;Vesga
+DAV: Griezmann;Lewandowski
+Punts: 1754
+Preu: 131000000
+
+1.4
+POR: Oblak
+DEF: Giménez;Savic;De Marcos;Lekue;Yuri
+MIG: Koke;Lemar;Brais Méndez
+DAV: Griezmann;Lewandowski
+Punts: 1786
+Preu: 131000000
+
+2.0
+POR: Oblak
+DEF: Giménez;Savic;De Marcos;Lekue;Yuri
+MIG: Koke;Lemar;Valverde
+DAV: Griezmann;Lewandowski
+Punts: 1799
+Preu: 134000000
+
+2.7
+POR: Oblak
+DEF: Giménez;Savic;De Marcos;Lekue;Yuri
+MIG: Koke;Lemar;Parejo
+DAV: Griezmann;Lewandowski
+Punts: 1801
+Preu: 131000000
+
+6.8
+POR: Oblak
+DEF: Giménez;Savic;De Marcos;Lekue;Yuri
+MIG: Koke;Lemar;Darder
+DAV: Griezmann;Lewandowski
+Punts: 1813
+Preu: 134000000
+
+8.5
+POR: Oblak
+DEF: Giménez;Savic;De Marcos;Lekue;Yuri
+MIG: Koke;Lemar;Kubo
+DAV: Griezmann;Lewandowski
+Punts: 1827
+Preu: 144000000
+
+109.8
+POR: Oblak
+DEF: Giménez;Savic;De Marcos;Lekue;Yuri
+MIG: Koke;Marcos Llorente;Kubo
+DAV: Griezmann;Lewandowski
+Punts: 1838
+Preu: 153000000
+
