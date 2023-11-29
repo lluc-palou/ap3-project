@@ -1,0 +1,280 @@
+0.0
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Marcos Llorente;Dani García
+DAV: Correa;Villalibre
+Punts: 1277
+Preu: 108000000
+
+0.0
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Marcos Llorente;Dani García
+DAV: Correa;Iñaki Williams
+Punts: 1449
+Preu: 118000000
+
+0.0
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Marcos Llorente;Dani García
+DAV: Correa;Aspas
+Punts: 1450
+Preu: 110000000
+
+0.0
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Marcos Llorente;Dani García
+DAV: Correa;Borja Iglesias
+Punts: 1457
+Preu: 111000000
+
+0.0
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Marcos Llorente;Dani García
+DAV: Correa;Isi
+Punts: 1491
+Preu: 116000000
+
+0.0
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Marcos Llorente;Dani García
+DAV: Iñaki Williams;Aspas
+Punts: 1496
+Preu: 117000000
+
+0.0
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Marcos Llorente;Dani García
+DAV: Iñaki Williams;Borja Iglesias
+Punts: 1503
+Preu: 118000000
+
+0.0
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Marcos Llorente;Dani García
+DAV: Aspas;Borja Iglesias
+Punts: 1504
+Preu: 110000000
+
+0.0
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Marcos Llorente;Dani García
+DAV: Aspas;Vinícius Jr
+Punts: 1542
+Preu: 120000000
+
+0.0
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Marcos Llorente;Dani García
+DAV: Borja Iglesias;Isi
+Punts: 1545
+Preu: 116000000
+
+0.1
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Marcos Llorente;Dani García
+DAV: Isi;Muriqi
+Punts: 1552
+Preu: 119000000
+
+0.1
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Marcos Llorente;Muniain
+DAV: Aspas;Vinícius Jr
+Punts: 1585
+Preu: 120000000
+
+0.1
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Marcos Llorente;Muniain
+DAV: Borja Iglesias;Isi
+Punts: 1588
+Preu: 116000000
+
+0.2
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Marcos Llorente;Muniain
+DAV: Isi;Muriqi
+Punts: 1595
+Preu: 119000000
+
+0.3
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Marcos Llorente;Raúl García
+DAV: Aspas;Lewandowski
+Punts: 1598
+Preu: 120000000
+
+0.5
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Marcos Llorente;Vesga
+DAV: Aspas;Isi
+Punts: 1607
+Preu: 118000000
+
+0.5
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Marcos Llorente;Vesga
+DAV: Borja Iglesias;Isi
+Punts: 1614
+Preu: 119000000
+
+0.8
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Marcos Llorente;William Carvalho
+DAV: Isi;Muriqi
+Punts: 1620
+Preu: 119000000
+
+1.1
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Marcos Llorente;Brais Méndez
+DAV: Aspas;Isi
+Punts: 1639
+Preu: 118000000
+
+1.1
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Marcos Llorente;Brais Méndez
+DAV: Borja Iglesias;Isi
+Punts: 1646
+Preu: 119000000
+
+2.3
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Marcos Llorente;Parejo
+DAV: Aspas;Isi
+Punts: 1654
+Preu: 118000000
+
+2.3
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Marcos Llorente;Parejo
+DAV: Borja Iglesias;Isi
+Punts: 1661
+Preu: 119000000
+
+45.6
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Dani García;William Carvalho
+DAV: Aspas;Griezmann
+Punts: 1674
+Preu: 119000000
+
+45.6
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Dani García;William Carvalho
+DAV: Borja Iglesias;Griezmann
+Punts: 1681
+Preu: 120000000
+
+46.5
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Dani García;Valverde
+DAV: Borja Iglesias;Lewandowski
+Punts: 1685
+Preu: 119000000
+
+47.2
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Dani García;Parejo
+DAV: Borja Iglesias;Lewandowski
+Punts: 1687
+Preu: 116000000
+
+47.3
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Dani García;Parejo
+DAV: Muriqi;Lewandowski
+Punts: 1694
+Preu: 119000000
+
+48.7
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Dani García;Sancet
+DAV: Aspas;Griezmann
+Punts: 1714
+Preu: 119000000
+
+48.7
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Dani García;Sancet
+DAV: Borja Iglesias;Griezmann
+Punts: 1721
+Preu: 120000000
+
+94.5
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Muniain;William Carvalho
+DAV: Borja Iglesias;Griezmann
+Punts: 1724
+Preu: 120000000
+
+95.4
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Muniain;Valverde
+DAV: Borja Iglesias;Lewandowski
+Punts: 1728
+Preu: 119000000
+
+96.1
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Muniain;Parejo
+DAV: Borja Iglesias;Lewandowski
+Punts: 1730
+Preu: 116000000
+
+96.2
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Muniain;Parejo
+DAV: Muriqi;Lewandowski
+Punts: 1737
+Preu: 119000000
+
+97.6
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Muniain;Sancet
+DAV: Aspas;Griezmann
+Punts: 1757
+Preu: 119000000
+
+97.6
+POR: Oblak
+DEF: Giménez;Savic;De Marcos
+MIG: Koke;Lemar;Saúl;Muniain;Sancet
+DAV: Borja Iglesias;Griezmann
+Punts: 1764
+Preu: 120000000
+

@@ -1,0 +1,40 @@
+0.0
+POR: Jaume Domenech
+DEF: Zaldua;Martín;Carlos Domínguez;Maras
+MIG: Antonio Puertas;Merquelanz;Ibrahima Kebé
+DAV: Fake_dav1;Fake_dav2;Fake_dav3
+Punts: 21
+Preu: 9432000
+
+0.0
+POR: Jaume Domenech
+DEF: Zaldua;Martín;Carlos Domínguez;Maras
+MIG: Antonio Puertas;Merquelanz;Youba Diarra
+DAV: Fake_dav1;Fake_dav2;Fake_dav3
+Punts: 26
+Preu: 9432000
+
+0.0
+POR: Jaume Domenech
+DEF: Zaldua;Martín;Carlos Domínguez;Maras
+MIG: Antonio Puertas;Merquelanz;Marvin
+DAV: Joao Félix;Fake_dav1;Fake_dav2
+Punts: 90
+Preu: 9762000
+
+0.1
+POR: Jaume Domenech
+DEF: Zaldua;Martín;Carlos Domínguez;Maras
+MIG: Antonio Puertas;Ibrahima Kebé;Brian Ocampo
+DAV: Joao Félix;Fake_dav1;Fake_dav2
+Punts: 178
+Preu: 9970000
+
+0.3
+POR: Jaume Domenech
+DEF: Zaldua;Martín;Carlos Domínguez;Maras
+MIG: Antonio Puertas;Brian Ocampo;Youba Diarra
+DAV: Joao Félix;Fake_dav1;Fake_dav2
+Punts: 183
+Preu: 9970000
+

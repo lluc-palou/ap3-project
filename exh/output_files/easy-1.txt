@@ -1,0 +1,32 @@
+0.0
+POR: Jaume Domenech
+DEF: Zaldua;Martín;Carlos Domínguez
+MIG: Antonio Puertas;Ibrahima Kebé;Brian Ocampo;Fake_mig1
+DAV: Fake_dav1;Fake_dav2;Fake_dav3
+Punts: 109
+Preu: 7970000
+
+1.8
+POR: Jaume Domenech
+DEF: Zaldua;Martín;Carlos Domínguez
+MIG: Antonio Puertas;Brian Ocampo;Youba Diarra;Fake_mig1
+DAV: Fake_dav1;Fake_dav2;Fake_dav3
+Punts: 114
+Preu: 7970000
+
+1.9
+POR: Jaume Domenech
+DEF: Zaldua;Martín;Carlos Domínguez
+MIG: Antonio Puertas;Brian Ocampo;Fake_mig1;Fake_mig2
+DAV: Joao Félix;Fake_dav1;Fake_dav2
+Punts: 178
+Preu: 7970000
+
+139.3
+POR: Jaume Domenech
+DEF: Zaldua;Martín;Carlos Domínguez
+MIG: Brian Ocampo;Youba Diarra;Fake_mig1;Fake_mig2
+DAV: Joao Félix;Fake_dav1;Fake_dav2
+Punts: 183
+Preu: 7970000
+

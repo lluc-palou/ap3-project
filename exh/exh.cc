@@ -187,7 +187,9 @@ void exhaustive_search(int def_count, int mig_count, int dav_count,
   if(satisfies_query_constraints(def_count, mig_count, dav_count, por_count, current_price, 
   current_points)) {
     best_points = current_points;
-    cout << "Solution found with score: " << best_points << endl;
+    end_time = now();
+    double time = end_time - start_time;
+    cout << "Running time: " << time << endl;
     cout << def_count << " " << mig_count << " " << dav_count << " " << por_count << " " << current_price << " " << current_points << endl;
     write_solution(current_price, current_points, partial_solution);
     return;

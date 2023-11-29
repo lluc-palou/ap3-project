@@ -34,7 +34,10 @@ execution_duration=180  # 3 minutes.
 # Loops through each query file.
 for query in "${queries[@]}"; do
     # Formulates the output file named based on the query file name.
-    output_file="${output_directory}/output_$(basename "$query")"
+    output_file="${output_directory}/$(basename "$query")"
+
+    # Identifies the query being executed.
+    echo "Running $query..."
 
     # Runs your program with the current query file and saves the output to the corresponding output file.
     timeout "$execution_duration" $program $database "$query" "$output_file"
