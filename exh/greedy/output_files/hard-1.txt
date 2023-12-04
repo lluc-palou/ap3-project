@@ -1,0 +1,7 @@
+3.5
+POR: Ter Stegen
+DEF: Maffeo;Álex Balde;Militão;
+MIG: De Galarreta;Kubo;Pathé Ciss;Riquelme;
+DAV: Hugo Duro;Borja Mayoral;Tecatito Corona;
+Punts: 1652
+Preu: 112000000
