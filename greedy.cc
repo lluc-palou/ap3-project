@@ -36,10 +36,19 @@ double now() { return clock() / double(CLOCKS_PER_SEC); }
 /* Returns the player with largest points per price ratio, used to sort the
 player database. */
 bool compare_players_efficiency(const Player &a, const Player &b) {
-  // Avoid dividing by 0.
-  if (a.price == 0 or b.price == 0)
-    return a.price != 0;
-  return (a.points / a.price) > (b.points / b.price);
+  // If both players have 0 points, order them based on price.
+  if (a.points == 0 and b.points == 0) {
+    return a.price < b.price;
+  }
+  // If one player has 0 points, it should be considered less efficient.
+  if (a.points == 0) {
+    return false;
+  } else if (b.points == 0) {
+    return true;
+  } else {
+    // Order players based on points to price ratio.
+    return (a.points / a.price) > (b.points / b.price);
+  }
 }
 
 // Reads the soccer player database.
@@ -68,6 +77,11 @@ void read_data_base() {
 
   // Sort database from most points scored to least
   sort(players.begin(), players.end(), compare_players_efficiency);
+  /*for (const Player &player : players) {
+    cout << "Name: " << player.name << ", Position: " << player.position
+         << ", Price: " << player.price << ", Team: " << player.team
+         << ", Points: " << player.points << endl;
+  }*/
 }
 
 // Reads the given query, aka player configuration and price condavaints.
@@ -79,7 +93,7 @@ void read_query() {
 }
 
 // Writes the best solution found by the algorithm till now in the output file.
-void write_solution(const int &current_price,
+void write_solution(const int &current_price, const int &current_points,
                     const vector<Player> &partial_solution) {
   /*
   // Sorts the solution based on soccer player positions for better formatting.
@@ -101,7 +115,8 @@ void write_solution(const int &current_price,
   double time = end_time - start_time;
 
   // Outputs the time for this solution.
-  cout << "Found a solution in " << time << " seconds!" << endl;
+  cout << "Found a solution in " << time << " seconds with " << current_points
+       << " points!" << endl;
   out << time << endl;
 
   // Creates a map to group soccer players by position.
@@ -158,7 +173,7 @@ void greedy_search(int idx, int def_count, int mig_count, int dav_count,
   if (satisfies_query_constraints(def_count, mig_count, dav_count, por_count,
                                   current_price, current_points)) {
     best_points = current_points;
-    write_solution(current_price, partial_solution);
+    write_solution(current_price, current_points, partial_solution);
     return;
   }
 
@@ -184,6 +199,13 @@ void greedy_search(int idx, int def_count, int mig_count, int dav_count,
         por_count += (players[i].position == "por");
         current_price += players[i].price;
         current_points += players[i].points;
+
+        // Print current state for debugging.
+        cout << "Added player " << players[i].name << " at index " << i << endl;
+        cout << "Current state: def=" << def_count << " mig=" << mig_count
+             << " dav=" << dav_count << " por=" << por_count
+             << " price=" << current_price << " points=" << current_points
+             << endl;
 
         // Recursive call to consider the next player.
         greedy_search(i + 1, def_count, mig_count, dav_count, por_count,
