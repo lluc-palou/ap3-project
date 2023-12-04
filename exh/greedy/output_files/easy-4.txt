@@ -1,7 +1,0 @@
-0.1
-POR: Marchesín
-DEF: Zaldua;Fake_def1;Fake_def2;
-MIG: Pablo Marín;Youba Diarra;Brian Ocampo;Fake_mig2;Fake_mig1;
-DAV: Joao Félix;Fake_dav5;
-Punts: 278
-Preu: 7630000

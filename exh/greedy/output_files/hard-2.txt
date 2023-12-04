@@ -1,7 +1,0 @@
-0.4
-POR: Unai Simón
-DEF: Maffeo;Raíllo;Álex Balde;Militão;
-MIG: De Galarreta;Kubo;Pathé Ciss;Riquelme;
-DAV: Hugo Duro;Borja Mayoral;
-Punts: 1707
-Preu: 118000000

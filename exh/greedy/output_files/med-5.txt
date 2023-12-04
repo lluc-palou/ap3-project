@@ -1,7 +1,0 @@
-1.1
-POR: Marchesín
-DEF: Fake_def1;Fake_def2;Fake_def3;Fake_def4;
-MIG: José Pozo;Borja García;Fake_mig2;Fake_mig1;Fake_mig3;
-DAV: Joao Félix;
-Punts: 220
-Preu: 9960000
