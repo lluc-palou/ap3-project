@@ -33,7 +33,6 @@ Algorithms:
   Exhaustive search with backtracking.
 ===============================================================================
 */
-
 #include <iostream>
 #include <fstream>
 #include <algorithm>
@@ -59,10 +58,10 @@ struct Player {
 
 // Definition of player database data structure.
 struct Player_database {
+  vector<Player> porters;
   vector<Player> defenses;
   vector<Player> migcampistes;
   vector<Player> davanters;
-  vector<Player> porters;
 };
 
 // Definition and goalkeeper initialisation of query data structure.
@@ -90,15 +89,28 @@ struct Partial_solution {
 
 // Definition of used players data structure.
 struct Used_players {
+  vector<bool> porters;
   vector<bool> defenses;
   vector<bool> migcampistes;
   vector<bool> davanters;
-  vector<bool> porters;
 };
 
 // Timing.
 double start_time, end_time;
 double now() { return clock() / double(CLOCKS_PER_SEC); }
+
+// Compares two soccer players based on their points.
+bool compare_players_by_points(const Player &a, const Player &b) {
+  return a.points > b.points;
+}
+
+// Sorts the players having into accoutn its position by points in ascending order.
+void sort_players_by_points(Player_database& data_base) {
+  sort(data_base.porters.begin(), data_base.porters.end(), compare_players_by_points);
+  sort(data_base.defenses.begin(), data_base.defenses.end(), compare_players_by_points);
+  sort(data_base.migcampistes.begin(), data_base.migcampistes.end(), compare_players_by_points);
+  sort(data_base.davanters.begin(), data_base.davanters.end(), compare_players_by_points);
+}
 
 // Reads the soccer player database.
 Player_database read_data_base(string data_base) {
@@ -108,7 +120,7 @@ Player_database read_data_base(string data_base) {
   while (not in.eof()) {
     Player player;
 
-    // Reads raw player data.
+    // Reads raw soccer player data.
     getline(in, player.name, ';');
     if (player.name == "")
       break;
@@ -133,11 +145,26 @@ Player_database read_data_base(string data_base) {
     }
   }
   in.close();
+  sort_players_by_points(database);
+
   return database;
 }
 
+// Reads the given query, aka tactic configuration and price constraints.
+Query read_query(string query) {
+  Query query_constraints;
+
+  ifstream in;
+  in.open(query);
+  in >> query_constraints.def >> query_constraints.mig >> query_constraints.dav >> 
+  query_constraints.total_limit >> query_constraints.player_limit;
+  in.close();
+
+  return query_constraints;
+}
+
 // Initialises the used players data structure.
-Used_players initialise_used_players(Player_database database) {
+Used_players initialise_used_players(const Player_database& database) {
   Used_players used;
 
   used.defenses = vector<bool>(database.defenses.size(), false);
@@ -148,19 +175,8 @@ Used_players initialise_used_players(Player_database database) {
   return used;
 }
 
-// Reads the given query, aka player configuration and price constraints.
-Query read_query(string query) {
-  Query query_constraints;
-  ifstream in;
-  in.open(query);
-  in >> query_constraints.def >> query_constraints.mig >> query_constraints.dav >> 
-  query_constraints.total_limit >> query_constraints.player_limit;
-  in.close();
-  return query_constraints;
-}
-
-// Compares two soccer players based on their positions for lexicographical order.
-bool compare_players_position(const Player &a, const Player &b) {
+// Compares two soccer players based on their positions in lexicographical order.
+bool compare_players_by_position(const Player &a, const Player &b) {
         return a.position < b.position;
 }
 
@@ -168,16 +184,15 @@ bool compare_players_position(const Player &a, const Player &b) {
 void write_solution(Partial_solution feasible_solution) {
 
   // Sorts the solution based on soccer player positions for better formatting.
-  sort(feasible_solution.players.begin(), feasible_solution.players.end(), compare_players_position);
+  sort(feasible_solution.players.begin(), feasible_solution.players.end(), compare_players_by_position);
 
   ofstream out(output_file, ios::app);
   out.setf(ios::fixed);
-  out.precision(1);
+  out.precision(2);
 
   // Outputs the time for this solution.
   out << feasible_solution.time << endl;
 
-  // Creates a map to group soccer players by position.
   unordered_map<string, vector<string>> players_position;
 
   // Fills the map.
@@ -218,8 +233,6 @@ void write_solution(Partial_solution feasible_solution) {
   // Writes best solution achieved points and price.
   out << "Punts: " << feasible_solution.best_points << endl;
   out << "Preu: " << feasible_solution.current_price << endl;
-
-  // Adds a separator between solutions.
   out << endl;
   out.close();
 }
@@ -268,9 +281,6 @@ vector<bool>& get_used_players(Used_players& used, string position) {
 void backtracking(const Player_database& database, const Query& query_constraints,
                     Used_players& used, Partial_solution& feasible_solution, 
                     const vector<string>& positions, int idx) {
-  // Pruning conditions.
-  if (feasible_solution.current_price > query_constraints.total_limit) return;
-
   // Base case: a partial solution has been extended to a feasible solution and can be 
   // considered as a final problem solution. The following condition checks whether 
   // current solution satisfies the query constraints, and updates the best solution found 
@@ -289,34 +299,42 @@ void backtracking(const Player_database& database, const Query& query_constraint
     return;
   }
 
+  
+  
+  // Pruning condition.
+  if (feasible_solution.current_price > query_constraints.total_limit) return;
+
   // Recursive case:
   // Extends the partial solution including a soccer player whether satisfies the query constraints.
   string position = positions[idx];
   const vector<Player>& players = get_players(database, position);
   if(get_count(feasible_solution, position) < get_query_constraint(query_constraints, position)) {
     for (int i = 0; i < int(players.size()); ++i) {
-      if (not get_used_players(used, position)[i] and (players[i].price <= query_constraints.player_limit)) {
-        // Updates soccer player position counter, price, and points.
-        feasible_solution.players.push_back(players[i]);
-        get_used_players(used, position)[i] = true;
-        get_count(feasible_solution, position)++;
-        feasible_solution.current_price += players[i].price;
-        feasible_solution.current_points += players[i].points;
+      // Pruning condition: checks whether adding the player exceeds the remaining budget.
+        if (feasible_solution.current_price + players[i].price <= query_constraints.total_limit) {
+          if (not get_used_players(used, position)[i] and (players[i].price <= query_constraints.player_limit)) {
+          // Updates soccer player position counter, price, and points.
+          feasible_solution.players.push_back(players[i]);
+          get_used_players(used, position)[i] = true;
+          get_count(feasible_solution, position)++;
+          feasible_solution.current_price += players[i].price;
+          feasible_solution.current_points += players[i].points;
 
-        backtracking(database, query_constraints, used, feasible_solution, positions, idx);
+          backtracking(database, query_constraints, used, feasible_solution, positions, idx);
 
-        // Undo changes made during the recursive call.
-        feasible_solution.current_price -= players[i].price;
-        feasible_solution.current_points -= players[i].points;
-        get_count(feasible_solution, position)--;
-        get_used_players(used, position)[i] = false;
-        feasible_solution.players.pop_back();
+          // Undo changes made during the recursive call.
+          feasible_solution.current_price -= players[i].price;
+          feasible_solution.current_points -= players[i].points;
+          get_count(feasible_solution, position)--;
+          get_used_players(used, position)[i] = false;
+          feasible_solution.players.pop_back();
+        }
       }
     }
   } 
   
   // Recursive call to the next player type.
-  if (idx+1 < int(positions.size())) {
+  else if (idx+1 < int(positions.size())) {
     backtracking(database, query_constraints, used, feasible_solution, positions, idx+1);
   }
 }
@@ -325,7 +343,7 @@ void backtracking(const Player_database& database, const Query& query_constraint
 void exhaustive_search(const Player_database& database, const Query& query_constraints, 
                        Used_players& used, Partial_solution& feasible_solution) {
   // Defines player positions.
-  vector<string> positions = {"def", "mig", "dav", "por"};
+  vector<string> positions = {"por", "def", "mig", "dav"};
 
   // Start the backtracking with the first player type.
   backtracking(database, query_constraints, used, feasible_solution, positions, 0);
