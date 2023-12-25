@@ -1,0 +1,72 @@
+0.00
+POR: Ter Stegen
+DEF: Álex Balde;Militão;Raíllo;Koundé;Aidoo
+MIG: Kubo;Darder;Sancet;Fake_mig4
+DAV: Fake_dav5
+Punts: 1870
+Preu: 120000000
+
+0.00
+POR: Ter Stegen
+DEF: Álex Balde;Militão;Raíllo;Koundé;Aidoo
+MIG: Kubo;Darder;Modric;Fake_mig4
+DAV: Joao Félix
+Punts: 1877
+Preu: 120000000
+
+0.01
+POR: Ter Stegen
+DEF: Álex Balde;Militão;Raíllo;Koundé;Aidoo
+MIG: Kubo;Darder;Brian Ocampo;Brasanac
+DAV: Joao Félix
+Punts: 1898
+Preu: 119782000
+
+0.08
+POR: Ter Stegen
+DEF: Álex Balde;Militão;Raíllo;Koundé;Aidoo
+MIG: Kubo;Parejo;Sancet;Brian Ocampo
+DAV: Joao Félix
+Punts: 2015
+Preu: 119782000
+
+0.51
+POR: Ter Stegen
+DEF: Álex Balde;Militão;Raíllo;Koundé;Aidoo
+MIG: Kubo;Sancet;Guillamón;Brian Ocampo
+DAV: Aspas
+Punts: 2024
+Preu: 119782000
+
+161.69
+POR: Ter Stegen
+DEF: Álex Balde;Militão;Raíllo;Koundé;Aidoo
+MIG: Darder;Parejo;Valverde;Sancet
+DAV: Fake_dav5
+Punts: 2047
+Preu: 120000000
+
+161.69
+POR: Ter Stegen
+DEF: Álex Balde;Militão;Raíllo;Koundé;Aidoo
+MIG: Darder;Parejo;Valverde;Modric
+DAV: Joao Félix
+Punts: 2054
+Preu: 120000000
+
+161.69
+POR: Ter Stegen
+DEF: Álex Balde;Militão;Raíllo;Koundé;Aidoo
+MIG: Darder;Parejo;Sancet;Robertone
+DAV: Joao Félix
+Punts: 2107
+Preu: 120000000
+
+161.69
+POR: Ter Stegen
+DEF: Álex Balde;Militão;Raíllo;Koundé;Aidoo
+MIG: Darder;Parejo;Sancet;Almeida
+DAV: Aspas
+Punts: 2200
+Preu: 120000000
+

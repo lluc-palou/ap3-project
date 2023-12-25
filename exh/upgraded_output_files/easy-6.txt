@@ -1,0 +1,24 @@
+0.00
+POR: Marchesín
+DEF: Mendes;Zaldua;Carlos Domínguez;Martín
+MIG: Brian Ocampo;Fake_mig1;Fake_mig2
+DAV: Fake_dav1;Fake_dav2;Fake_dav3
+Punts: 223
+Preu: 7970000
+
+0.63
+POR: Marchesín
+DEF: Mendes;Zaldua;Carlos Domínguez;Fake_def1
+MIG: Brian Ocampo;Youba Diarra;Fake_mig1
+DAV: Fake_dav1;Fake_dav2;Fake_dav3
+Punts: 228
+Preu: 7970000
+
+0.63
+POR: Marchesín
+DEF: Mendes;Zaldua;Carlos Domínguez;Fake_def1
+MIG: Brian Ocampo;Fake_mig1;Fake_mig2
+DAV: Joao Félix;Fake_dav1;Fake_dav2
+Punts: 292
+Preu: 7970000
+

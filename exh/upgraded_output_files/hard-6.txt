@@ -1,0 +1,64 @@
+0.00
+POR: Ter Stegen
+DEF: Álex Balde;Militão;Raíllo;Koundé
+MIG: Kubo;Darder;Parejo
+DAV: Joao Félix;Miguel Rodríguez;Fake_dav5
+Punts: 1791
+Preu: 119310000
+
+0.01
+POR: Ter Stegen
+DEF: Álex Balde;Militão;Raíllo;Koundé
+MIG: Kubo;Darder;Sancet
+DAV: Borja Iglesias;Fake_dav5;Fake_dav4
+Punts: 1881
+Preu: 120000000
+
+0.01
+POR: Ter Stegen
+DEF: Álex Balde;Militão;Raíllo;Koundé
+MIG: Kubo;Darder;Sancet
+DAV: Aspas;Joao Félix;Fake_dav5
+Punts: 1943
+Preu: 120000000
+
+10.32
+POR: Ter Stegen
+DEF: Álex Balde;Militão;Raíllo;Koundé
+MIG: Kubo;Parejo;Sancet
+DAV: Aspas;Joao Félix;Miguel Rodríguez
+Punts: 1953
+Preu: 119310000
+
+14.69
+POR: Ter Stegen
+DEF: Álex Balde;Militão;Raíllo;Koundé
+MIG: Kubo;Parejo;Brian Ocampo
+DAV: Borja Iglesias;Enes Ünal;Joao Félix
+Punts: 2016
+Preu: 119782000
+
+49.77
+POR: Ter Stegen
+DEF: Álex Balde;Militão;Raíllo;Koundé
+MIG: Kubo;Sancet;Almeida
+DAV: Borja Iglesias;Aspas;Fake_dav5
+Punts: 2020
+Preu: 120000000
+
+49.78
+POR: Ter Stegen
+DEF: Álex Balde;Militão;Raíllo;Koundé
+MIG: Kubo;Sancet;Almeida
+DAV: Aspas;Chimy Ávila;Joao Félix
+Punts: 2035
+Preu: 120000000
+
+54.59
+POR: Ter Stegen
+DEF: Álex Balde;Militão;Raíllo;Koundé
+MIG: Kubo;Sancet;Modric
+DAV: Borja Iglesias;Aspas;Joao Félix
+Punts: 2050
+Preu: 120000000
+

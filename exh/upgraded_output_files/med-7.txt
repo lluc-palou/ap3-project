@@ -1,0 +1,40 @@
+0.00
+POR: Marchesín
+DEF: Carmona;Jesús Vázquez;Zaldua;Fake_def1;Fake_def2
+MIG: Fake_mig1;Fake_mig2;Fake_mig3
+DAV: Fake_dav1;Fake_dav2
+Punts: 197
+Preu: 10000000
+
+0.10
+POR: Marchesín
+DEF: Carmona;Jesús Vázquez;Fake_def1;Fake_def2;Fake_def3
+MIG: Fake_mig1;Fake_mig2;Fake_mig3
+DAV: Joao Félix;Fake_dav1
+Punts: 255
+Preu: 10000000
+
+6.11
+POR: Marchesín
+DEF: Carmona;Mendes;Zaldua;Fake_def1;Fake_def2
+MIG: Brian Ocampo;Fake_mig1;Fake_mig2
+DAV: Fake_dav1;Fake_dav2
+Punts: 272
+Preu: 9782000
+
+16.15
+POR: Marchesín
+DEF: Carmona;Mendes;Fake_def1;Fake_def2;Fake_def3
+MIG: Brian Ocampo;Fake_mig1;Fake_mig2
+DAV: Joao Félix;Fake_dav1
+Punts: 330
+Preu: 9782000
+
+68.39
+POR: Marchesín
+DEF: Carmona;Zaldua;Carlos Domínguez;Fake_def1;Fake_def2
+MIG: Brian Ocampo;Fake_mig1;Fake_mig2
+DAV: Joao Félix;Fake_dav1
+Punts: 337
+Preu: 9970000
+

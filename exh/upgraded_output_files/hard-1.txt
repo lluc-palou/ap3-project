@@ -1,0 +1,48 @@
+0.00
+POR: Ter Stegen
+DEF: Álex Balde;Militão;Raíllo
+MIG: Kubo;Darder;Parejo;Valverde
+DAV: Joao Félix;Herrera;Fake_dav5
+Punts: 1788
+Preu: 120000000
+
+0.00
+POR: Ter Stegen
+DEF: Álex Balde;Militão;Raíllo
+MIG: Kubo;Darder;Parejo;Sancet
+DAV: Borja Iglesias;Joao Félix;Fake_dav5
+Punts: 1971
+Preu: 120000000
+
+2.04
+POR: Ter Stegen
+DEF: Álex Balde;Militão;Raíllo
+MIG: Kubo;Darder;Parejo;Brian Ocampo
+DAV: Borja Iglesias;Aspas;Fake_dav5
+Punts: 1975
+Preu: 119782000
+
+2.04
+POR: Ter Stegen
+DEF: Álex Balde;Militão;Raíllo
+MIG: Kubo;Darder;Parejo;Brian Ocampo
+DAV: Aspas;Chimy Ávila;Joao Félix
+Punts: 1990
+Preu: 119782000
+
+25.59
+POR: Ter Stegen
+DEF: Álex Balde;Militão;Raíllo
+MIG: Kubo;Darder;Sancet;Guillamón
+DAV: Aspas;Chimy Ávila;Joao Félix
+Punts: 1995
+Preu: 120000000
+
+27.02
+POR: Ter Stegen
+DEF: Álex Balde;Militão;Raíllo
+MIG: Kubo;Darder;Sancet;Brian Ocampo
+DAV: Borja Iglesias;Enes Ünal;Joao Félix
+Punts: 2041
+Preu: 118782000
+
