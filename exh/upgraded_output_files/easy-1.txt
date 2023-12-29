@@ -1,14 +1,14 @@
 0.00
 POR: Marchesín
-DEF: Mendes;Zaldua;Carlos Domínguez
+DEF: Zaldua;Carlos Domínguez;Mendes
 MIG: Brian Ocampo;Youba Diarra;Fake_mig1;Fake_mig2
 DAV: Fake_dav1;Fake_dav2;Fake_dav3
 Punts: 228
 Preu: 7970000
 
-0.01
+0.00
 POR: Marchesín
-DEF: Mendes;Zaldua;Carlos Domínguez
+DEF: Zaldua;Carlos Domínguez;Mendes
 MIG: Brian Ocampo;Fake_mig1;Fake_mig2;Fake_mig3
 DAV: Joao Félix;Fake_dav1;Fake_dav2
 Punts: 292

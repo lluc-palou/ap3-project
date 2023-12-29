@@ -1,40 +1,152 @@
 0.00
-POR: Ter Stegen
-DEF: Álex Balde;Militão;Raíllo
-MIG: Kubo;Darder;Parejo;Valverde;Brian Ocampo
-DAV: Fake_dav5;Fake_dav4
-Punts: 1807
-Preu: 119782000
+POR: Marchesín
+DEF: Álex Balde;Militão;De Marcos
+MIG: Brian Ocampo;Sancet;Almeida;Aleix García;Dani Rodríguez
+DAV: Joao Félix;Aspas
+Punts: 1704
+Preu: 57782000
 
 0.00
-POR: Ter Stegen
-DEF: Álex Balde;Militão;Raíllo
-MIG: Kubo;Darder;Parejo;Sancet;Almeida
-DAV: Joao Félix;Fake_dav5
-Punts: 1956
-Preu: 120000000
+POR: Marchesín
+DEF: Álex Balde;Militão;De Marcos
+MIG: Brian Ocampo;Sancet;Almeida;Aleix García;Dani Rodríguez
+DAV: Joao Félix;Borja Iglesias
+Punts: 1711
+Preu: 58782000
+
+0.00
+POR: Marchesín
+DEF: Álex Balde;Militão;De Marcos
+MIG: Brian Ocampo;Sancet;Almeida;Aleix García;Dani Rodríguez
+DAV: Joao Félix;Muriqi
+Punts: 1718
+Preu: 61782000
+
+0.00
+POR: Marchesín
+DEF: Álex Balde;Militão;De Marcos
+MIG: Brian Ocampo;Sancet;Almeida;Aleix García;Dani Rodríguez
+DAV: Joao Félix;Isi
+Punts: 1745
+Preu: 63782000
+
+0.00
+POR: Marchesín
+DEF: Álex Balde;Militão;De Marcos
+MIG: Brian Ocampo;Sancet;Almeida;Aleix García;Dani Rodríguez
+DAV: Joao Félix;Lewandowski
+Punts: 1791
+Preu: 69782000
+
+0.00
+POR: Marchesín
+DEF: Álex Balde;Militão;De Marcos
+MIG: Brian Ocampo;Sancet;Almeida;Aleix García;Dani Rodríguez
+DAV: Joao Félix;Griezmann
+Punts: 1833
+Preu: 76782000
+
+0.00
+POR: Marchesín
+DEF: Álex Balde;Militão;De Marcos
+MIG: Brian Ocampo;Sancet;Almeida;Aleix García;Dani Rodríguez
+DAV: Aspas;Isi
+Punts: 1858
+Preu: 68782000
+
+0.00
+POR: Marchesín
+DEF: Álex Balde;Militão;De Marcos
+MIG: Brian Ocampo;Sancet;Almeida;Aleix García;Dani Rodríguez
+DAV: Aspas;Lewandowski
+Punts: 1904
+Preu: 74782000
+
+0.00
+POR: Marchesín
+DEF: Álex Balde;Militão;De Marcos
+MIG: Brian Ocampo;Sancet;Almeida;Aleix García;Dani Rodríguez
+DAV: Aspas;Griezmann
+Punts: 1946
+Preu: 81782000
+
+0.00
+POR: Marchesín
+DEF: Álex Balde;Militão;De Marcos
+MIG: Brian Ocampo;Sancet;Almeida;Aleix García;Dani Rodríguez
+DAV: Borja Iglesias;Griezmann
+Punts: 1953
+Preu: 82782000
+
+0.00
+POR: Marchesín
+DEF: Álex Balde;Militão;De Marcos
+MIG: Brian Ocampo;Sancet;Almeida;Aleix García;Dani Rodríguez
+DAV: Muriqi;Griezmann
+Punts: 1960
+Preu: 85782000
+
+0.00
+POR: Marchesín
+DEF: Álex Balde;Militão;De Marcos
+MIG: Brian Ocampo;Sancet;Almeida;Aleix García;Dani Rodríguez
+DAV: Isi;Griezmann
+Punts: 1987
+Preu: 87782000
 
 0.01
-POR: Ter Stegen
-DEF: Álex Balde;Militão;Raíllo
-MIG: Kubo;Darder;Parejo;Sancet;Brian Ocampo
-DAV: Aspas;Fake_dav5
-Punts: 1983
-Preu: 119782000
+POR: Marchesín
+DEF: Álex Balde;Militão;De Marcos
+MIG: Brian Ocampo;Sancet;Almeida;Aleix García;Dani Rodríguez
+DAV: Lewandowski;Griezmann
+Punts: 2033
+Preu: 93782000
 
-1.24
-POR: Ter Stegen
-DEF: Álex Balde;Militão;Raíllo
-MIG: Kubo;Darder;Parejo;Modric;Brian Ocampo
-DAV: Aspas;Joao Félix
-Punts: 1990
-Preu: 119782000
+0.30
+POR: Marchesín
+DEF: Álex Balde;Militão;De Marcos
+MIG: Brian Ocampo;Sancet;Almeida;Aleix García;Parejo
+DAV: Lewandowski;Griezmann
+Punts: 2065
+Preu: 96782000
 
-31.58
-POR: Ter Stegen
-DEF: Álex Balde;Militão;Raíllo
-MIG: Kubo;Darder;Sancet;Almeida;Brian Ocampo
-DAV: Borja Iglesias;Joao Félix
-Punts: 2028
-Preu: 118782000
+0.88
+POR: Marchesín
+DEF: Álex Balde;Militão;De Marcos
+MIG: Brian Ocampo;Sancet;Almeida;Aleix García;Darder
+DAV: Lewandowski;Griezmann
+Punts: 2077
+Preu: 99782000
+
+2.11
+POR: Marchesín
+DEF: Álex Balde;Militão;De Marcos
+MIG: Brian Ocampo;Sancet;Almeida;Aleix García;Kubo
+DAV: Lewandowski;Griezmann
+Punts: 2091
+Preu: 109782000
+
+52.12
+POR: Marchesín
+DEF: Álex Balde;Militão;De Marcos
+MIG: Brian Ocampo;Sancet;Almeida;Parejo;Darder
+DAV: Lewandowski;Griezmann
+Punts: 2109
+Preu: 102782000
+
+53.32
+POR: Marchesín
+DEF: Álex Balde;Militão;De Marcos
+MIG: Brian Ocampo;Sancet;Almeida;Parejo;Kubo
+DAV: Lewandowski;Griezmann
+Punts: 2123
+Preu: 112782000
+
+141.15
+POR: Marchesín
+DEF: Álex Balde;Militão;De Marcos
+MIG: Brian Ocampo;Sancet;Almeida;Darder;Kubo
+DAV: Lewandowski;Griezmann
+Punts: 2135
+Preu: 115782000
 
