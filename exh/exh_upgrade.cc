@@ -99,22 +99,38 @@ struct Used_players {
 double start_time, end_time;
 double now() { return clock() / double(CLOCKS_PER_SEC); }
 
-// Compares two soccer players based on their points.
-bool compare_players_by_points(const Player &a, const Player &b) {
-  return a.points > b.points;
+/* Returns the player with largest points per price ratio, used to sort the
+player database. */
+bool compare_players_efficiency(const Player &a, const Player &b) {
+  // If both players have 0 points, order them based on price.
+  if (a.points == 0 and b.points == 0) {
+    return a.price < b.price;
+  }
+
+  // If one player has 0 points, it should be considered less efficient.
+  if (a.points == 0) {
+    return false;
+  } else if (b.points == 0) {
+    return true;
+  } else {
+    double efficiency_a = (a.points * 1.0) / (a.price * 1.0);
+    double efficiency_b = (b.points * 1.0) / (b.price * 1.0);
+
+    return efficiency_a > efficiency_b;
+  }
 }
 
-// Sorts the players having into accoutn its position by points in ascending
+// Sorts the players having into account its position by points in ascending
 // order.
 void sort_players_by_points(Player_database &data_base) {
   sort(data_base.porters.begin(), data_base.porters.end(),
-       compare_players_by_points);
+       compare_players_efficiency);
   sort(data_base.defenses.begin(), data_base.defenses.end(),
-       compare_players_by_points);
+       compare_players_efficiency);
   sort(data_base.migcampistes.begin(), data_base.migcampistes.end(),
-       compare_players_by_points);
+       compare_players_efficiency);
   sort(data_base.davanters.begin(), data_base.davanters.end(),
-       compare_players_by_points);
+       compare_players_efficiency);
 }
 
 // Reads the soccer player database.
