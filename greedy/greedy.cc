@@ -40,14 +40,17 @@ bool compare_players_efficiency(const Player &a, const Player &b) {
   if (a.points == 0 and b.points == 0) {
     return a.price < b.price;
   }
+
   // If one player has 0 points, it should be considered less efficient.
   if (a.points == 0) {
     return false;
   } else if (b.points == 0) {
     return true;
   } else {
-    // Order players based on points to price ratio.
-    return (a.points / a.price) > (b.points / b.price);
+    double efficiency_a = (a.points * 1.0) / (a.price * 1.0);
+    double efficiency_b = (b.points * 1.0) / (b.price * 1.0);
+
+    return efficiency_a > efficiency_b;
   }
 }
 
@@ -68,7 +71,8 @@ void read_data_base() {
     string aux2;
     getline(in, aux2);
 
-    players.push_back(player);
+    if (player.price <= player_limit)
+      players.push_back(player);
   }
   in.close();
 
@@ -77,11 +81,6 @@ void read_data_base() {
 
   // Sort database from most points scored to least
   sort(players.begin(), players.end(), compare_players_efficiency);
-  /*for (const Player &player : players) {
-    cout << "Name: " << player.name << ", Position: " << player.position
-         << ", Price: " << player.price << ", Team: " << player.team
-         << ", Points: " << player.points << endl;
-  }*/
 }
 
 // Reads the given query, aka player configuration and price condavaints.
@@ -226,8 +225,8 @@ int main(int argc, char **argv) {
   output_file = argv[3];
 
   // Reads the input files.
-  read_data_base();
   read_query();
+  read_data_base();
 
   // Algorithm execution, solution writting, and timing.
   start_time = now();
