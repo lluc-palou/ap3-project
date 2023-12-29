@@ -1,7 +1,7 @@
 0.5
-POR: Unai Simón
-DEF: Maffeo;Raíllo;Álex Balde;Militão;
-MIG: De Galarreta;Kubo;Pathé Ciss;
-DAV: Hugo Duro;Borja Mayoral;Tecatito Corona;
-Punts: 1564
-Preu: 116000000
+POR: Marchesín
+DEF: Álex Balde;Militão;Aidoo;Raíllo;
+MIG: Brian Ocampo;Sancet;Kubo;
+DAV: Joao Félix;Aspas;Borja Iglesias;
+Punts: 1813
+Preu: 83782000

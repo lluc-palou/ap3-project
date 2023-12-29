@@ -1,7 +1,7 @@
-3.5
-POR: Ter Stegen
-DEF: Maffeo;Álex Balde;Militão;
-MIG: De Galarreta;Kubo;Pathé Ciss;Riquelme;
-DAV: Hugo Duro;Borja Mayoral;Tecatito Corona;
-Punts: 1652
-Preu: 112000000
+0.3
+POR: Marchesín
+DEF: Álex Balde;Militão;Aidoo;
+MIG: Brian Ocampo;Sancet;Darder;Kubo;
+DAV: Joao Félix;Aspas;Borja Iglesias;
+Punts: 1842
+Preu: 80782000

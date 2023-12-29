@@ -1,7 +1,7 @@
-1.5
+0.1
 POR: Marchesín
-DEF: Fake_def1;Fake_def2;Fake_def3;Fake_def4;
-MIG: José Pozo;Borja García;Fake_mig2;Fake_mig1;
+DEF: Zaldua;Carlos Domínguez;Fake_def3;Fake_def5;
+MIG: Brian Ocampo;Brasanac;Fake_mig5;Fake_mig4;
 DAV: Joao Félix;Fake_dav5;
-Punts: 220
-Preu: 9960000
+Punts: 346
+Preu: 9970000
