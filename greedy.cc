@@ -5,6 +5,7 @@
 */
 
 #include <algorithm>
+#include <cmath>
 #include <fstream>
 #include <iostream>
 #include <unordered_map>
@@ -27,8 +28,6 @@ string output_file;
 
 // General data data structures, global variables and timing.
 vector<Player> players;
-vector<bool> used;
-int best_points = 0;
 int def, mig, dav, por, total_limit, player_limit;
 double start_time, end_time;
 double now() { return clock() / double(CLOCKS_PER_SEC); }
@@ -40,14 +39,17 @@ bool compare_players_efficiency(const Player &a, const Player &b) {
   if (a.points == 0 and b.points == 0) {
     return a.price < b.price;
   }
+
   // If one player has 0 points, it should be considered less efficient.
   if (a.points == 0) {
     return false;
   } else if (b.points == 0) {
     return true;
   } else {
-    // Order players based on points to price ratio.
-    return (a.points / a.price) > (b.points / b.price);
+    double efficiency_a = (a.points * 1.0) / pow(a.price, 0.35);
+    double efficiency_b = (b.points * 1.0) / pow(b.price, 0.35);
+
+    return efficiency_a > efficiency_b;
   }
 }
 
@@ -68,20 +70,13 @@ void read_data_base() {
     string aux2;
     getline(in, aux2);
 
-    players.push_back(player);
+    if (player.price <= player_limit)
+      players.push_back(player);
   }
   in.close();
 
-  // Vector to mark used soccer players in the exhaustive search.
-  used = vector<bool>(players.size(), false);
-
   // Sort database from most points scored to least
   sort(players.begin(), players.end(), compare_players_efficiency);
-  /*for (const Player &player : players) {
-    cout << "Name: " << player.name << ", Position: " << player.position
-         << ", Price: " << player.price << ", Team: " << player.team
-         << ", Points: " << player.points << endl;
-  }*/
 }
 
 // Reads the given query, aka player configuration and price condavaints.
@@ -149,80 +144,47 @@ void write_solution(const int &current_price, const int &current_points,
   out << endl;
 
   // Writes best solution achieved points and price.
-  out << "Punts: " << best_points << endl;
+  out << "Punts: " << current_points << endl;
   out << "Preu: " << current_price << endl;
 
   out.close();
 }
 
-// Checks whether the query constraints are satisfied.
-bool satisfies_query_constraints(int &def_count, int &mig_count, int &dav_count,
-                                 int &por_count, int &current_price,
-                                 int &current_points) {
-  return (def_count == def) and (mig_count == mig) and (dav_count == dav) and
-         (por_count == 1) and (current_price <= total_limit) and
-         (current_points > best_points);
-}
-
 // Main algorithm concerning a greedy approach.
-void greedy_search(int idx, int def_count, int mig_count, int dav_count,
-                   int por_count, int current_price, int current_points,
-                   vector<bool> &used, vector<Player> &partial_solution) {
-  // Base case: a partial solution has been extended and can be considered as
-  // a final problem solution.
-  if (satisfies_query_constraints(def_count, mig_count, dav_count, por_count,
-                                  current_price, current_points)) {
-    best_points = current_points;
-    write_solution(current_price, current_points, partial_solution);
-    return;
-  }
+void greedy_search(int def_count, int mig_count, int dav_count, int por_count,
+                   int current_price, int current_points, vector<bool> &used,
+                   vector<Player> &partial_solution) {
+  int selected_players = 0;
+  while (selected_players < 11) {
+    // Iterate through the players starting from index 'idx'.
+    for (int i = 0; i < int(players.size()); ++i) {
+      // Skip used players.
+      if (not used[i] and players[i].price <= player_limit and
+          current_price + players[i].price < total_limit) {
+        // Check if adding the player satisfies the position constraints.
+        if ((players[i].position == "def" and def_count < def) or
+            (players[i].position == "mig" and mig_count < mig) or
+            (players[i].position == "dav" and dav_count < dav) or
+            (players[i].position == "por" and por_count == 0)) {
 
-  // Recursive case:
-  // Iterate through the players starting from index 'idx'.
-  for (int i = idx; i < int(players.size()); ++i) {
-    // Skip used players.
-    if (not used[i]) {
-      // Check if adding the player satisfies the position constraints.
-      if ((players[i].position == "def" and def_count < def) or
-          (players[i].position == "mig" and mig_count < mig) or
-          (players[i].position == "dav" and dav_count < dav) or
-          (players[i].position == "por" and por_count == 0)) {
+          // Add the player to the team.
+          used[i] = true;
+          partial_solution.push_back(players[i]);
 
-        // Add the player to the team.
-        used[i] = true;
-        partial_solution.push_back(players[i]);
+          // Update counters, prices, and points.
+          def_count += (players[i].position == "def");
+          mig_count += (players[i].position == "mig");
+          dav_count += (players[i].position == "dav");
+          por_count += (players[i].position == "por");
+          current_price += players[i].price;
+          current_points += players[i].points;
 
-        // Update counters, prices, and points.
-        def_count += (players[i].position == "def");
-        mig_count += (players[i].position == "mig");
-        dav_count += (players[i].position == "dav");
-        por_count += (players[i].position == "por");
-        current_price += players[i].price;
-        current_points += players[i].points;
-
-        // Print current state for debugging.
-        cout << "Added player " << players[i].name << " at index " << i << endl;
-        cout << "Current state: def=" << def_count << " mig=" << mig_count
-             << " dav=" << dav_count << " por=" << por_count
-             << " price=" << current_price << " points=" << current_points
-             << endl;
-
-        // Recursive call to consider the next player.
-        greedy_search(i + 1, def_count, mig_count, dav_count, por_count,
-                      current_price, current_points, used, partial_solution);
-
-        // Backtrack: remove the last added player.
-        used[i] = false;
-        partial_solution.pop_back();
-        def_count -= (players[i].position == "def");
-        mig_count -= (players[i].position == "mig");
-        dav_count -= (players[i].position == "dav");
-        por_count -= (players[i].position == "por");
-        current_price -= players[i].price;
-        current_points -= players[i].points;
+          ++selected_players;
+        }
       }
     }
   }
+  write_solution(current_price, current_points, partial_solution);
 }
 
 int main(int argc, char **argv) {
@@ -232,11 +194,13 @@ int main(int argc, char **argv) {
   output_file = argv[3];
 
   // Reads the input files.
-  read_data_base();
   read_query();
+  read_data_base();
 
   // Algorithm execution, solution writting, and timing.
   start_time = now();
   vector<Player> partial_solution;
-  greedy_search(0, 0, 0, 0, 0, 0, 0, used, partial_solution);
+  // Vector to mark used soccer players in the exhaustive search.
+  vector<bool> used(players.size(), false);
+  greedy_search(0, 0, 0, 0, 0, 0, used, partial_solution);
 }
