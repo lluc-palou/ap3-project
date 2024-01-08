@@ -33,7 +33,7 @@ sort the player database. */
 bool compare_players_efficiency(const Player &a, const Player &b) {
   /* Ordering criteria: Efficciency points/price ratio with a penalization to
      expensive players. By manually experimenting with roots, the power
-     function (0.35) has been identified as the most effective. */
+     function (0.35) has shown to be very effective. */
 
   // If both players have 0 points, order them based on price.
   if (a.points == 0 and b.points == 0) {
@@ -106,7 +106,7 @@ void aux_write_solution(ofstream &out,
   out << endl;
 }
 
-// Given a solution, ends timing and prints it in the required format.
+// Given a solution, ends timing and prints both in the required format.
 void write_solution(const int &current_price, const int &current_points,
                     const vector<Player> &partial_solution) {
   ofstream out(output_file);
@@ -139,7 +139,7 @@ void write_solution(const int &current_price, const int &current_points,
 }
 
 /* Main algorithm concerning a greedy approach. Finds the first 11 players,
-   ordered by defined criteria that meet the constraints. */
+   ordered by defined criteria (efficiency ratio) that meet the constraints. */
 void greedy_search(int def_count, int mig_count, int dav_count, int por_count,
                    int current_price, int current_points, vector<bool> &used,
                    vector<Player> &partial_solution) {

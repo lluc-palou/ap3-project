@@ -1,57 +1,20 @@
-/*
-===============================================================================
-Description:
+// Metaheuristics algorithm using GRASP approach with Simulated Annealing.
+// Authors: Lluc Palou and Ramon Ventura.
 
-  Given a database of soccer player information and a query with constraints
-  about a tactic concerning the soccer players, this code will provide the
-  tactic configuration that maximizes the tactic points while satisfying the
-  imposed constraints. (Combinatorial optimization problem)
-
-Input:
-
-  Three files given in order:
-
-  1. The data base of soccer players containing its information: name,
-  position, price, team and points. (data_base)
-
-  2. The query containing a tactic realization with the corresponding
-  constariants: the numer of defenders (def), midfielders (mig), strikers (dav),
-  and an implicit goalkeeper, the total limit price of the tactic (total_limit)
-  and the maximum limit price for a single player (player_limit).
-
-  3. The output file in which the code will write the best solutions that finds
-  while running. (output_file)
-
-Output:
-
-  Corresponds to the best solution found while running the code with the
-  following information: a double with only one decimal indicating the time
-  needed to find the best solution, the name of: the goalkeeper, defenders,
-  midfielders and strikers; poitns, and total tactic price. All these
-  information will be written in the output file with proper format.
-
-Algorithms:
-
-  Metaheuristics using simulated annealing approach.
-===============================================================================
-*/
 #include <algorithm>
 #include <cassert>
-#include <ctime>
 #include <cmath>
-#include <numeric>
+#include <ctime>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <numeric>
 #include <string>
 #include <unordered_map>
 #include <vector>
 using namespace std;
 
-// Declaration of output file.
-string output_file;
-
-// Definition of player data structure.
+// Definition of soccer player class.
 struct Player {
   string name;
   string position;
@@ -100,19 +63,20 @@ struct Used_players {
   vector<bool> davanters;
 };
 
-// Timing.
+// Declaration of output file and timing
+string output_file;
 double start_time, end_time;
 double now() { return clock() / double(CLOCKS_PER_SEC); }
 
 // Boltzmann distribution temperature hyperparameter.
 double temperature = 1e5;
 
-// Returns the most efficient player based on the following criteria, used to
-// sort the player database.
+/* Returns the most efficient player based on the following criteria, used to
+sort the player database. */
 bool compare_players_efficiency(const Player &a, const Player &b) {
   /* Ordering criteria: Efficciency points/price ratio with a penalization to
      expensive players. By manually experimenting with roots, the power
-     function (0.35) has been identified as the most effective. */
+     function (0.35) has shown to be very effective. */
 
   // If both players have 0 points, order them based on price.
   if (a.points == 0 and b.points == 0) {
@@ -132,8 +96,7 @@ bool compare_players_efficiency(const Player &a, const Player &b) {
   }
 }
 
-// Sorts the players having into account its position by points in ascending
-// order.
+// Applies ordering criteria to each of the vectors of positions.
 void sort_players_by_points(Player_database &data_base) {
   sort(data_base.porters.begin(), data_base.porters.end(),
        compare_players_efficiency);
@@ -145,7 +108,8 @@ void sort_players_by_points(Player_database &data_base) {
        compare_players_efficiency);
 }
 
-// Reads the soccer player database.
+/* Reads and stores the soccer player database. Discards players that surpass
+   the player limit price. */
 Player_database read_data_base(string data_base, Query query_constraints) {
   Player_database database;
 
@@ -166,8 +130,7 @@ Player_database read_data_base(string data_base, Query query_constraints) {
     string aux2;
     getline(in, aux2);
 
-    // Stores players that satisfy price limit constraints in separate vectors
-    // based on their positions.
+    // Price restriction
     if (player.price <= query_constraints.player_limit) {
       if (player.position == "por") {
         database.porters.push_back(player);
@@ -182,12 +145,12 @@ Player_database read_data_base(string data_base, Query query_constraints) {
   }
   in.close();
 
+  // Sorts database accordingly to the ordering criteria.
   sort_players_by_points(database);
-
   return database;
 }
 
-// Reads the given query, aka tactic configuration and price constraints.
+// Reads the given query. That is, player configurations and price condavaints.
 Query read_query(string query) {
   Query query_constraints;
 
@@ -213,14 +176,8 @@ Used_players initialise_used_players(const Player_database &database) {
   return used;
 }
 
-// Compares two soccer players based on their positions in lexicographical
-// order.
-bool compare_players_by_position(const Player &a, const Player &b) {
-  return a.position < b.position;
-}
-
-// Auxiliar printing function. Given a position prints all the players from the
-// solution that belong to it, in the correct format.
+/* Auxiliar printing function. Given a position prints all the players from the
+   solution that belong to it, in the correct format. */
 void aux_write_solution(ofstream &out,
                         unordered_map<string, vector<string>> &players_position,
                         const string &position) {
@@ -236,23 +193,20 @@ void aux_write_solution(ofstream &out,
   out << endl;
 }
 
-// Writes the best solution found by the algorithm till now in the output file.
+// Given a solution prints itself and its timing in the required format.
 void write_solution(Partial_solution feasible_solution) {
   ofstream out(output_file);
   out.setf(ios::fixed);
   out.precision(1);
 
-  // Outputs the time for this solution.
   out << feasible_solution.time << endl;
 
+  // Creates a map to group soccer players by position and fills the map.
   unordered_map<string, vector<string>> players_position;
-
-  // Fills the map.
   for (const Player &player : feasible_solution.players) {
     players_position[player.position].push_back(player.name);
   }
 
-  // Writes the tactic soccer players by positions.
   out << "POR: ";
   aux_write_solution(out, players_position, "por");
   out << "DEF: ";
@@ -262,15 +216,14 @@ void write_solution(Partial_solution feasible_solution) {
   out << "DAV: ";
   aux_write_solution(out, players_position, "dav");
 
-  // Writes best solution achieved points and price.
   out << "Punts: " << feasible_solution.best_points << endl;
   out << "Preu: " << feasible_solution.current_price << endl;
-  out << endl;
+
   out.close();
 }
 
 // Checks whether the query constraints are satisfied.
-bool satisfies_query_constraints(const Query& query_constraints,
+bool satisfies_query_constraints(const Query &query_constraints,
                                  const Partial_solution &feasible_solution) {
   return feasible_solution.def_count == query_constraints.def and
          feasible_solution.mig_count == query_constraints.mig and
@@ -281,7 +234,7 @@ bool satisfies_query_constraints(const Query& query_constraints,
 }
 
 // References the appropriate player vector based on player position.
-vector<Player> get_players(const Player_database& database, string position) {
+vector<Player> get_players(const Player_database &database, string position) {
   if (position == "def")
     return database.defenses;
   else if (position == "mig")
@@ -324,7 +277,9 @@ int get_query_constraint(const Query &query_constraints, string position) {
   return 0;
 }
 
-vector<bool> &get_used_players(Used_players& used, string position) {
+/* References the appropriate boolean vector indicating used players based on
+   player position. */
+vector<bool> &get_used_players(Used_players &used, string position) {
   if (position == "def")
     return used.defenses;
   else if (position == "mig")
@@ -338,49 +293,64 @@ vector<bool> &get_used_players(Used_players& used, string position) {
   return aux;
 }
 
-// Generates a feasible solution through a greedy algorithm, chosing first 11 players
-// that satisfy query constraints, ordered by points / price ratio.
-void construct_greedy_solution(const Player_database& database, const Query& query_constraints, 
-                               Used_players& used, Partial_solution& feasible_solution,
-                               const vector<string>& positions, int idx) {
-  while (not satisfies_query_constraints(query_constraints, feasible_solution)) {
+/* Generates a feasible solution through a greedy algorithm, chosing first 11
+   players that satisfy query constraints, ordered by defined criteria
+   (efficiency ratio). */
+void construct_greedy_solution(const Player_database &database,
+                               const Query &query_constraints,
+                               Used_players &used,
+                               Partial_solution &feasible_solution,
+                               const vector<string> &positions, int idx) {
+  while (
+      not satisfies_query_constraints(query_constraints, feasible_solution)) {
     string position = positions[idx];
     const vector<Player> &players = get_players(database, position);
 
-    if (get_count(feasible_solution, position) < get_query_constraint(query_constraints, position)) {
+    if (get_count(feasible_solution, position) <
+        get_query_constraint(query_constraints, position)) {
       for (int i = 0; i < int(players.size()); ++i) {
-        if (get_count(feasible_solution, position) < get_query_constraint(query_constraints, position)) {
-          // Checks whether adding the player exceeds the remaining budget.
-          if (feasible_solution.current_price + players[i].price <= query_constraints.total_limit) {
-            if (not get_used_players(used, position)[i]) {
-              // Updates soccer player position counter, price, and points.
-              feasible_solution.players.push_back(players[i]);
-              feasible_solution.indexes.push_back(i);
-              get_used_players(used, position)[i] = true;
-              get_count(feasible_solution, position)++;
-              feasible_solution.current_price += players[i].price;
-              feasible_solution.current_points += players[i].points;
-            }
+        if (get_count(feasible_solution, position) <
+            get_query_constraint(query_constraints, position)) {
+
+          /* Pruning condition: checks whether adding the player exceeds the
+             remaining budget. */
+          if (feasible_solution.current_price + players[i].price <=
+                  query_constraints.total_limit and
+              not get_used_players(used, position)[i]) {
+
+            // Updates soccer player position counter, price, and points.
+            feasible_solution.players.push_back(players[i]);
+            feasible_solution.indexes.push_back(i);
+            get_used_players(used, position)[i] = true;
+            get_count(feasible_solution, position)++;
+            feasible_solution.current_price += players[i].price;
+            feasible_solution.current_points += players[i].points;
           }
         }
       }
     }
-    
-    else if (idx + 1 < int(positions.size())) idx += 1;
+
+    else if (idx + 1 < int(positions.size()))
+      idx += 1;
   }
 }
 
-// Allows to worsen a partial solution with probability given by the Boltzmann distribution.
+/* Allows to worsen a partial solution with probability given by the Boltzmann
+   distribution. */
 bool probability(int new_points, int old_points) {
-  if (new_points == old_points or temperature == 0) return false;
-  double n = rand() / RAND_MAX, p = exp(- (old_points - new_points) / temperature);
-  if(n < p) return true;
+  if (new_points == old_points or temperature == 0)
+    return false;
+  double n = rand() / RAND_MAX,
+         p = exp(-(old_points - new_points) / temperature);
+  if (n < p)
+    return true;
   return false;
 }
 
-// Sais whether a better solution has been found using simulated annealing.
-bool improve_solution(const Player_database& database, const Query& query_constraints, 
-                      Used_players& used, Partial_solution& feasible_solution) {
+// Says whether a better solution has been found using simulated annealing.
+bool improve_solution(const Player_database &database,
+                      const Query &query_constraints, Used_players &used,
+                      Partial_solution &feasible_solution) {
   bool found = false;
 
   // Generates a vector {0, 1, ..., n-1}.
@@ -390,27 +360,29 @@ bool improve_solution(const Player_database& database, const Query& query_constr
   // Shuffles the elements randomly.
   random_shuffle(random.begin(), random.end());
 
-  for(int i = 0; i < 11 and not found; ++i) {
+  for (int i = 0; i < 11 and not found; ++i) {
     int idx = random[i];
 
-    // Choses one player from feasible solution at random to be changed.
-    Player& player = feasible_solution.players[idx];
+    // Chooses one player from feasible solution at random to be changed.
+    Player &player = feasible_solution.players[idx];
     string position = player.position;
     int price = feasible_solution.current_price - player.price;
     int points = feasible_solution.current_points - player.points;
 
     const vector<Player> &players = get_players(database, position);
 
-    // Will try to change only one player and see if solution improves with simulated annealing approach.
+    /* Will try to change only one player and see if solution improves with
+       simulated annealing approach. */
     for (int j = 0; j < int(players.size()) and not found; ++j) {
       Player new_player = players[j];
 
-      if (not get_used_players(used, position)[j] and 
-         (new_player.price + price <= query_constraints.total_limit) and 
-         ((new_player.points + points > feasible_solution.current_points) or 
-          probability(new_player.points, player.points))) {
+      if (not get_used_players(used, position)[j] and
+          (new_player.price + price <= query_constraints.total_limit) and
+          ((new_player.points + points > feasible_solution.current_points) or
+           probability(new_player.points, player.points))) {
         found = true;
-        get_used_players(used, position)[feasible_solution.indexes[idx]] = false;
+        get_used_players(used, position)[feasible_solution.indexes[idx]] =
+            false;
         get_used_players(used, position)[j] = true;
         feasible_solution.current_points = points + new_player.points;
         feasible_solution.current_price = price + new_player.price;
@@ -428,38 +400,37 @@ bool improve_solution(const Player_database& database, const Query& query_constr
     }
 
     // Updates temperature hyperparameter.
-    temperature *= 0.99999;
+    temperature *= 0.999999;
   }
 
   return found;
 }
 
 // Main algorithm concerning metaheursitics with GRASP approach.
-void grasp_mh(const Player_database& database,
-              const Query& query_constraints, Used_players& used,
-              Partial_solution& feasible_solution) {
-    // Defines player positions.
-    vector<string> positions = {"por", "def", "mig", "dav"};
+void grasp_mh(const Player_database &database, const Query &query_constraints,
+              Used_players &used, Partial_solution &feasible_solution) {
+  vector<string> positions = {"por", "def", "mig", "dav"};
 
-    // Constructs greedy partial solution.
-    construct_greedy_solution(database, query_constraints, used, feasible_solution, positions, 0);
-    feasible_solution.best_points = feasible_solution.current_points;
+  // Constructs greedy partial solution.
+  construct_greedy_solution(database, query_constraints, used,
+                            feasible_solution, positions, 0);
+  feasible_solution.best_points = feasible_solution.current_points;
 
-    // Applies simulated annealing.
-    while (improve_solution(database, query_constraints, used, feasible_solution));
+  // Applies simulated annealing.
+  while (improve_solution(database, query_constraints, used, feasible_solution))
+    ;
 }
 
 int main(int argc, char **argv) {
-  // Definition of arguments passed in execution.
   string data_base;
   string query;
 
-  // Files implied in code execution.
   data_base = argv[1];
   query = argv[2];
   output_file = argv[3];
 
-  // Reads the input files.
+  /* Firstly reads the query to store player limit. Allows us to filter them
+     during the database reading process. */
   Query query_constraints = read_query(query);
   Player_database database = read_data_base(data_base, query_constraints);
   Used_players used = initialise_used_players(database);
