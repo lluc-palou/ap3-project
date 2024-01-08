@@ -107,20 +107,27 @@ double now() { return clock() / double(CLOCKS_PER_SEC); }
 // Boltzmann distribution temperature hyperparameter.
 double temperature = 1e5;
 
-// Sorts the players having into account points per price ratio.
+// Returns the most efficient player based on the following criteria, used to
+// sort the player database.
 bool compare_players_efficiency(const Player &a, const Player &b) {
-  // Whether both players have 0 points, order them based on price.
+  /* Ordering criteria: Efficciency points/price ratio with a penalization to
+     expensive players. By manually experimenting with roots, the power
+     function (0.35) has been identified as the most effective. */
+
+  // If both players have 0 points, order them based on price.
   if (a.points == 0 and b.points == 0) {
     return a.price < b.price;
   }
 
-  // Whether one player has 0 points, it should be considered less efficient.
-  if (a.points == 0) return false;
-  else if (b.points == 0) return true;
-  else {
-    double efficiency_a = (a.points * 1.0) / (a.price * 1.0);
-    double efficiency_b = (b.points * 1.0) / (b.price * 1.0);
-    
+  // If one player has 0 points, it should be considered less efficient.
+  if (a.points == 0) {
+    return false;
+  } else if (b.points == 0) {
+    return true;
+
+  } else {
+    double efficiency_a = (a.points * 1.0) / pow(a.price, 0.35);
+    double efficiency_b = (b.points * 1.0) / pow(b.price, 0.35);
     return efficiency_a > efficiency_b;
   }
 }
@@ -212,14 +219,26 @@ bool compare_players_by_position(const Player &a, const Player &b) {
   return a.position < b.position;
 }
 
+// Auxiliar printing function. Given a position prints all the players from the
+// solution that belong to it, in the correct format.
+void aux_write_solution(ofstream &out,
+                        unordered_map<string, vector<string>> &players_position,
+                        const string &position) {
+  bool first = true;
+  for (const string &name : players_position[position]) {
+    if (!first) {
+      out << ";" << name;
+    } else {
+      out << name;
+      first = false;
+    }
+  }
+  out << endl;
+}
+
 // Writes the best solution found by the algorithm till now in the output file.
 void write_solution(Partial_solution feasible_solution) {
-
-  // Sorts the solution based on soccer player positions for better formatting.
-  sort(feasible_solution.players.begin(), feasible_solution.players.end(),
-       compare_players_by_position);
-
-  ofstream out(output_file, ios::app);
+  ofstream out(output_file);
   out.setf(ios::fixed);
   out.precision(1);
 
@@ -234,34 +253,14 @@ void write_solution(Partial_solution feasible_solution) {
   }
 
   // Writes the tactic soccer players by positions.
-  out << "POR: " << players_position["por"][0] << endl;
-
+  out << "POR: ";
+  aux_write_solution(out, players_position, "por");
   out << "DEF: ";
-  for (auto it = players_position["def"].begin();
-       it != players_position["def"].end(); ++it) {
-    out << *it;
-    if (next(it) != players_position["def"].end()) {
-      out << ";";
-    }
-  }
-
+  aux_write_solution(out, players_position, "def");
   out << "MIG: ";
-  for (auto it = players_position["mig"].begin();
-       it != players_position["mig"].end(); ++it) {
-    out << *it;
-    if (next(it) != players_position["mig"].end()) {
-      out << ";";
-    }
-  }
-
+  aux_write_solution(out, players_position, "mig");
   out << "DAV: ";
-  for (auto it = players_position["dav"].begin();
-       it != players_position["dav"].end(); ++it) {
-    out << *it;
-    if (next(it) != players_position["dav"].end()) {
-      out << ";";
-    }
-  }
+  aux_write_solution(out, players_position, "dav");
 
   // Writes best solution achieved points and price.
   out << "Punts: " << feasible_solution.best_points << endl;
@@ -322,8 +321,7 @@ int get_query_constraint(const Query &query_constraints, string position) {
   else if (position == "por")
     return query_constraints.por;
 
-  int aux;
-  return aux;
+  return 0;
 }
 
 vector<bool> &get_used_players(Used_players& used, string position) {
@@ -354,7 +352,7 @@ void construct_greedy_solution(const Player_database& database, const Query& que
         if (get_count(feasible_solution, position) < get_query_constraint(query_constraints, position)) {
           // Checks whether adding the player exceeds the remaining budget.
           if (feasible_solution.current_price + players[i].price <= query_constraints.total_limit) {
-            if (not get_used_players(used, position)[i] and (players[i].price <= query_constraints.player_limit)) {
+            if (not get_used_players(used, position)[i]) {
               // Updates soccer player position counter, price, and points.
               feasible_solution.players.push_back(players[i]);
               feasible_solution.indexes.push_back(i);
@@ -362,12 +360,6 @@ void construct_greedy_solution(const Player_database& database, const Query& que
               get_count(feasible_solution, position)++;
               feasible_solution.current_price += players[i].price;
               feasible_solution.current_points += players[i].points;
-
-              // Production phase checkers.
-              //cout << "por: " << feasible_solution.por_count <<
-              //" def: " << feasible_solution.def_count <<
-              //" mig: " << feasible_solution.mig_count <<
-              //" dav: " << feasible_solution.dav_count << endl;
             }
           }
         }
@@ -376,8 +368,6 @@ void construct_greedy_solution(const Player_database& database, const Query& que
     
     else if (idx + 1 < int(positions.size())) idx += 1;
   }
-
-  //cout << "found feasible solution!" << endl;
 }
 
 // Allows to worsen a partial solution with probability given by the Boltzmann distribution.
@@ -401,7 +391,6 @@ bool improve_solution(const Player_database& database, const Query& query_constr
   random_shuffle(random.begin(), random.end());
 
   for(int i = 0; i < 11 and not found; ++i) {
-    // Gets one of the random index.
     int idx = random[i];
 
     // Choses one player from feasible solution at random to be changed.
@@ -434,10 +423,6 @@ bool improve_solution(const Player_database& database, const Query& query_constr
           feasible_solution.time = end_time - start_time;
           feasible_solution.best_points = feasible_solution.current_points;
           write_solution(feasible_solution);
-
-          // Production phase checkers.
-          cout << "Best solution found! in time: " << feasible_solution.time <<
-          " with points: " << feasible_solution.best_points << endl;
         }
       }
     }
