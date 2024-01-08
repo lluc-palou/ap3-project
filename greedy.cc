@@ -71,6 +71,7 @@ void read_data_base() {
     string aux2;
     getline(in, aux2);
 
+    // Price restriction
     if (player.price <= player_limit)
       players.push_back(player);
   }
@@ -80,7 +81,7 @@ void read_data_base() {
   sort(players.begin(), players.end(), compare_players_efficiency);
 }
 
-// Reads the given query, aka player configuration and price condavaints.
+// Reads the given query. That is, player configurations and price condavaints.
 void read_query() {
   ifstream in;
   in.open(query);
@@ -138,7 +139,7 @@ void write_solution(const int &current_price, const int &current_points,
 }
 
 /* Main algorithm concerning a greedy approach. Finds the first 11 players,
-   ordered by defined criteria, that meet the constraints. */
+   ordered by defined criteria that meet the constraints. */
 void greedy_search(int def_count, int mig_count, int dav_count, int por_count,
                    int current_price, int current_points, vector<bool> &used,
                    vector<Player> &partial_solution) {
@@ -184,7 +185,7 @@ int main(int argc, char **argv) {
   read_query();
   read_data_base();
 
-  // Algorithm execution.
+  // Algorithm execution, solution writting, and timing.
   start_time = now();
   vector<Player> partial_solution;
   vector<bool> used(players.size(), false);
